@@ -21,18 +21,19 @@ export default class VehicleList extends React.Component {
             <Card style={styles.cardStyles} key={index}>
                 <CardItem cardBody style={styles.imageContainer}>
                     {this.props.selectedType === 'Bikes' ?
-                        <Image resizeMode="cover" source={{uri: 'http://www.sagmart.com/car-images/royal-enfield-bullet/appearance-bullet.jpg'}} style={{height: 200, width: '100%', borderWidth:0}}/>
+                        <Image resizeMode="cover" source={{uri: 'http://www.sagmart.com/car-images/royal-enfield-bullet/appearance-bullet.jpg'}} style={styles.imageStyles}/>
                         :   
-                        <Image resizeMode="cover" source={{uri: 'http://resize.indiatvnews.com/en/resize/newbucket/715_-/2016/07/hoda-activa-1469096847.jpg'}} style={{height: 200, width: '100%', borderWidth:0}}/>
+                        <Image resizeMode="cover" source={{uri: 'http://resize.indiatvnews.com/en/resize/newbucket/715_-/2016/07/hoda-activa-1469096847.jpg'}} style={styles.imageStyles}/>
                     }
                 </CardItem>
                 <Text style={styles.textStyles}>{item.maker} {item.name}</Text>
                 <CardItem cardBody style={styles.imageContainer}>
                     <Left>
-                        <Text style={styles.contentText}>{item.availableFrom}</Text>
+                        <Text style={styles.contentText}>Available From : </Text>
+                        <Text>{item.availableFrom}</Text>
                     </Left>
                     <Right>
-                        <Text style={styles.contentText}>{item.chargesPerKm} rs per km</Text>
+                        <Text style={styles.contentText}>@{item.chargesPerKm}/km</Text>
                     </Right>
                 </CardItem>
             </Card>
@@ -47,12 +48,12 @@ export default class VehicleList extends React.Component {
   }
   render() {
     return (
-        <Container style={styles.container}>
-            <Text style={styles.headerStyle}>{this.props.selectedType}</Text>
+        <View style={styles.container}>
             <Content style={styles.contentStyle}>
+            <Text style={styles.headerStyle}>{this.props.selectedType}</Text>
                 {this.renderList()}
             </Content>
-        </Container>
+        </View>
     );
   }
 }
@@ -73,9 +74,18 @@ const styles = StyleSheet.create({
         borderBottomWidth:0,
         borderRightWidth:0,
         borderLeftWidth:0,
+        shadowOffset: {"width": 0, "height": 0},
+        shadowRadius: 0,
+        elevation: 0
     },
     imageContainer: {
         marginBottom: 20,
+    },
+    imageStyles:{
+        height: 200, 
+        width: '100%', 
+        borderWidth:0,
+        borderRadius: 2,
     },
     rowStyle:{
         flexDirection:'column',

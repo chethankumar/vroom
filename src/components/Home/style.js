@@ -6,4 +6,7 @@ const styles = StyleSheet.create({
     text: {
       color: 'red',
     },
+    contentContainer: {
+      paddingVertical: 20
+    }
 });  
