@@ -27,6 +27,7 @@
   "dependencies": {
     "@expo/vector-icons": "^6.2.2",
     "expo": "^23.0.4",
+    "moment": "^2.20.1",
     "native-base": "^2.3.6",
     "react": "16.0.0",
     "react-native": "0.50.3",
