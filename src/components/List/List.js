@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, Image, View, TouchableOpacity, StyleSheet } from 'react-native';
 import theme from '../common/theme';
-// import styles from './style';
+import styles from './style';
 import { List, ListItem, Card, CardItem, Body, Left, Icon, Right, Content, Row, Col, Grid, Container } from 'native-base';
 
 import BikeDetail from '../BikeDetail/BikeDetail';
@@ -38,11 +38,11 @@ export default class VehicleList extends React.Component {
             </Right>
           </CardItem>
         </Card>
-      </TouchableOpacity>);
+                       </TouchableOpacity>);
     });
 
     return (
-      <List bordered={false}>
+      <List bordered={false} style={styles.container}>
         {vehicleList}
       </List>
     );
@@ -51,23 +51,10 @@ export default class VehicleList extends React.Component {
     return (
       <View style={styles.container}>
         <Content style={styles.contentStyle}>
-          <Text style={styles.headerStyle}>{this.props.selectedType}</Text>
+          <Text style={theme.heading}>{this.props.selectedType}</Text>
           {this.renderList()}
         </Content>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  imageContainer: {
-    marginBottom: 20,
-  },
-  rowStyle: {
-    flexDirection: 'column',
-  },
-  contentStyle: {
-    borderBottomWidth: 0,
-    borderWidth: 0,
-  },
-});
