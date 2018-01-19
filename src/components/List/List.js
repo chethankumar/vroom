@@ -30,8 +30,7 @@ export default class VehicleList extends React.Component {
                 <Text style={theme.text_bold}>{item.maker} {item.name}</Text>
                 <CardItem cardBody style={styles.imageContainer}>
                     <Left>
-                        <Text style={theme.text_normal}>Available From : </Text>
-                        <Text>{item.availableFrom}</Text>
+                        <Text style={theme.text_normal}>Available From {item.availableFrom}</Text>
                     </Left>
                     <Right>
                         <Text style={theme.text_normal}>@{item.chargesPerKm}/km</Text>

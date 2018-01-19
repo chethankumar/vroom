@@ -2,6 +2,9 @@ import React from 'react';
 import styles from './style';
 import { View, ScrollView } from 'react-native';
 import VehicleList from '../List/List';
+import moment from 'moment';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 import {
     Container,
     Header,
@@ -32,7 +35,7 @@ export default class Home extends React.Component {
             bikeList: [{
                 name:'Fazer',
                 maker: 'Yamaha',
-                availableFrom: '17/10/2018',
+                availableFrom: new moment().format("MMM Do"),
                 chargesPerKm: 10,
                 imgurl: 'http://www.sagmart.com/car-images/royal-enfield-bullet/appearance-bullet.jpg'
             },{
@@ -251,7 +254,8 @@ export default class Home extends React.Component {
                 <FooterTab>
                     <Button active={this.state.selectedTab === 'bikes'} 
                     onPress={() => this.setState({ selectedTab: 'bikes' })} >
-                        <Icon name="ios-apps-outline" />
+                        {/* <Icon name="motorbike" /> */}
+                        <MaterialCommunityIcons name="motorbike" size={32} color="#2874F0"/>
                     </Button>
                     <Button active={this.state.selectedTab === 'scooters'}
                     onPress={() => this.setState({ selectedTab: 'scooters' })} >
