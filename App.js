@@ -4,33 +4,33 @@ import { Font } from 'expo';
 import Home from './src/components/Home/Home';
 
 export default class App extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
 
-    this.state ={
+    this.state = {
       fontLoaded: false,
-    }
+    };
   }
   async componentWillMount() {
     await Expo.Font.loadAsync({
-      'Roboto': require('native-base/Fonts/Roboto.ttf'),
-      'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
-      'Ionicons': require('@expo/vector-icons/fonts/Ionicons.ttf'),
-      'Circular-Bold' : require('./src/assets/fonts/CircularStd-Bold.otf'),
-      'Circular' : require('./src/assets/fonts/CircularStd-Medium.otf')
+      Roboto: require('native-base/Fonts/Roboto.ttf'),
+      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+      Ionicons: require('@expo/vector-icons/fonts/Ionicons.ttf'),
+      'Circular-Bold': require('./src/assets/fonts/CircularStd-Bold.otf'),
+      Circular: require('./src/assets/fonts/CircularStd-Medium.otf'),
     });
     this.setState({ fontLoaded: true });
   }
-  componentDidMount(){
+  componentDidMount() {
     Font.loadAsync({
-      'Roboto': require('native-base/Fonts/Roboto.ttf'),
+      Roboto: require('native-base/Fonts/Roboto.ttf'),
     });
   }
   render() {
     return (
       <View style={styles.container}>
-      {this.state.fontLoaded ? 
-       <Home />
+        {this.state.fontLoaded ?
+          <Home />
        : null}
       </View>
     );
