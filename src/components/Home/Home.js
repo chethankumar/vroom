@@ -47,13 +47,13 @@ export class Home extends React.Component {
         maker: 'Yamaha',
         availableFrom: '17/10/2018',
         chargesPerKm: 10,
-        imgurl: 'http://www.sagmart.com/car-images/royal-enfield-bullet/appearance-bullet.jpg',
+        imgurl: 'https://cdn1.droom.in//photos/mmt_gallery/2241/_nd3913411120170728.jpg',
       }, {
         name: 'Pulsar 220',
         maker: 'Bajaj',
         availableFrom: '17/10/2018',
         chargesPerKm: 10,
-        imgurl: 'http://www.sagmart.com/car-images/royal-enfield-bullet/appearance-bullet.jpg',
+        imgurl: 'https://www.thrustzone.com/wp-content/uploads/sansys_photo_gallery/307/2017-Bajaj-Pulsar-220-BSIV-Review-12.jpg',
       }, {
         name: 'Bullet Classic 350',
         maker: 'Royal Enfield',
@@ -65,13 +65,13 @@ export class Home extends React.Component {
         maker: 'Yamaha',
         availableFrom: '17/10/2018',
         chargesPerKm: 10,
-        imgurl: 'http://www.sagmart.com/car-images/royal-enfield-bullet/appearance-bullet.jpg',
+        imgurl: 'https://cdn1.droom.in//photos/mmt_gallery/2241/_nd3913411120170728.jpg',
       }, {
         name: 'Pulsar 220',
         maker: 'Bajaj',
         availableFrom: '17/10/2018',
         chargesPerKm: 10,
-        imgurl: 'http://www.sagmart.com/car-images/royal-enfield-bullet/appearance-bullet.jpg',
+        imgurl: 'https://www.thrustzone.com/wp-content/uploads/sansys_photo_gallery/307/2017-Bajaj-Pulsar-220-BSIV-Review-12.jpg',
       }, {
         name: 'Bullet Classic 350',
         maker: 'Royal Enfield',
@@ -83,13 +83,13 @@ export class Home extends React.Component {
         maker: 'Yamaha',
         availableFrom: '17/10/2018',
         chargesPerKm: 10,
-        imgurl: 'http://www.sagmart.com/car-images/royal-enfield-bullet/appearance-bullet.jpg',
+        imgurl: 'https://cdn1.droom.in//photos/mmt_gallery/2241/_nd3913411120170728.jpg',
       }, {
         name: 'Pulsar 220',
         maker: 'Bajaj',
         availableFrom: '17/10/2018',
         chargesPerKm: 10,
-        imgurl: 'http://www.sagmart.com/car-images/royal-enfield-bullet/appearance-bullet.jpg',
+        imgurl: 'https://www.thrustzone.com/wp-content/uploads/sansys_photo_gallery/307/2017-Bajaj-Pulsar-220-BSIV-Review-12.jpg',
       }, {
         name: 'Bullet Classic 350',
         maker: 'Royal Enfield',
@@ -101,13 +101,13 @@ export class Home extends React.Component {
         maker: 'Yamaha',
         availableFrom: '17/10/2018',
         chargesPerKm: 10,
-        imgurl: 'http://www.sagmart.com/car-images/royal-enfield-bullet/appearance-bullet.jpg',
+        imgurl: 'https://cdn1.droom.in//photos/mmt_gallery/2241/_nd3913411120170728.jpg',
       }, {
         name: 'Pulsar 220',
         maker: 'Bajaj',
         availableFrom: '17/10/2018',
         chargesPerKm: 10,
-        imgurl: 'http://www.sagmart.com/car-images/royal-enfield-bullet/appearance-bullet.jpg',
+        imgurl: 'https://www.thrustzone.com/wp-content/uploads/sansys_photo_gallery/307/2017-Bajaj-Pulsar-220-BSIV-Review-12.jpg',
       }],
       scooterList: [{
         name: 'Activa',
@@ -132,8 +132,8 @@ export class Home extends React.Component {
   }
 
 
-  showDeatil() {
-    this.props.navigation.navigate('BikeDetail');
+  showDeatil(details) {
+    this.props.navigation.navigate('BikeDetail', { details });
   }
 
   renderSelectedTab() {
@@ -142,12 +142,13 @@ export class Home extends React.Component {
         return (<VehicleList
           listToRender={this.state.bikeList}
           selectedType="Bikes"
-          onTap={() => { this.showDeatil(); }}
+          onTap={(details) => { this.showDeatil(details); }}
         />);
       case 'scooters':
         return (<VehicleList
           listToRender={this.state.scooterList}
           selectedType="Scooters"
+          onTap={(details) => { this.showDeatil(details); }}
         />);
       default:
         return null;

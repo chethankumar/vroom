@@ -39,6 +39,9 @@ const theme = StyleSheet.create({
     fontSize: 50,
     paddingLeft: 15,
   },
+  base_background: {
+    backgroundColor: '#fff',
+  },
 });
 
 export default theme;
