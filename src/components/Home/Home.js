@@ -26,6 +26,13 @@ const defaultProps = {
 };
 
 export class Home extends React.Component {
+  static navigationOptions = {
+    headerStyle: {
+      backgroundColor: '#ffffff',
+      borderBottomColor: '#fff',
+    },
+  };
+
   constructor(props) {
     super(props);
 

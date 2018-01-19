@@ -16,6 +16,12 @@ import {
 } from 'native-base';
 
 export class BikeDetail extends React.Component {
+  static navigationOptions = {
+    headerStyle: {
+      backgroundColor: '#ffffff',
+      borderBottomColor: '#fff',
+    },
+  };
   render() {
     return (
       <View>
