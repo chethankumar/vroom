@@ -18,25 +18,30 @@ import theme from '../common/theme';
 import styles from './BikeDetailStyle';
 
 export class BikeDetail extends React.Component {
-  static navigationOptions = {
+  static navigationOptions =({ navigation }) => ({
     headerStyle: {
       backgroundColor: '#ffffff',
       borderBottomColor: '#fff',
     },
-  };
+    header: <Image resizeMode="cover" source={{ uri: navigation.state.params.details.imgurl }} style={styles.image} />,
+  });
+
+
   render() {
     return (
-      <View style={theme.base_background}>
-        <Image resizeMode="cover" source={{ uri: this.props.navigation.state.params.details.imgurl }} style={theme.image} />
-        <Text style={theme.heading}>
-          {this.props.navigation.state.params.details.name}
-        </Text>
-        <Text style={styles.text_normal}>
+      <Container>
+        <ScrollView style={theme.base_background}>
+
+          <Text style={theme.heading}>
+            {this.props.navigation.state.params.details.name}
+          </Text>
+          <Text style={styles.text_normal}>
           Made by <Text style={styles.text_bold}>{this.props.navigation.state.params.details.maker}
-                  </Text>
-        </Text>
-        <Text style={styles.text_normal} />
-      </View>);
+          </Text>
+          </Text>
+          <Text style={styles.text_normal} />
+        </ScrollView>
+      </Container>);
   }
 }
 
@@ -44,4 +49,6 @@ export default StackNavigator({
   Home: {
     screen: BikeDetail,
   },
+}, {
+  headerMode: 'none',
 });

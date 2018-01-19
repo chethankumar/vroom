@@ -41,6 +41,7 @@ const theme = StyleSheet.create({
   },
   base_background: {
     backgroundColor: '#fff',
+    paddingTop: 0,
   },
 });
 

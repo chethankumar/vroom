@@ -14,6 +14,11 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#149bcc',
   },
+  image: {
+    height: 300,
+    width: '100%',
+
+  },
 });
 
 export default styles;

@@ -191,5 +191,7 @@ export default StackNavigator({
   BikeDetail: {
     screen: BikeDetail,
   },
+}, {
+  headerMode: 'float',
 });
 
