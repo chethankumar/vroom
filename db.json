@@ -5,77 +5,45 @@
         "maker": "Yamaha",
         "availableFrom": "17/10/2018",
         "chargesPerKm": 10,
-        "imgurl": "https://cdn1.droom.in//photos/mmt_gallery/2241/_nd3913411120170728.jpg"
+        "imgurl": "https://cdn1.droom.in//photos/mmt_gallery/2241/_nd3913411120170728.jpg",
+        "reviews":[{
+            "comment":"Its a pretty fast bike and you can zip through the city easily",
+            "rating":4
+        },
+        {
+            "comment":"Its a bit on the heavy side but powerful",
+            "rating":2
+        }]
         },
         {
         "name": "Pulsar 220",
         "maker": "Bajaj",
         "availableFrom": "17/10/2018",
         "chargesPerKm": 10,
-        "imgurl": "https://www.thrustzone.com/wp-content/uploads/sansys_photo_gallery/307/2017-Bajaj-Pulsar-220-BSIV-Review-12.jpg"
+        "imgurl": "https://www.thrustzone.com/wp-content/uploads/sansys_photo_gallery/307/2017-Bajaj-Pulsar-220-BSIV-Review-12.jpg",
+        "reviews":[{
+            "comment":"Its a good looking bike with a fixed front.",
+            "rating":4
+        },
+        {
+            "comment":"Not every one is fan of how it looks. Does the job though!",
+            "rating":2
+        }]
         },
         {
         "name": "Bullet Classic 350",
         "maker": "Royal Enfield",
         "availableFrom": "17/10/2018",
         "chargesPerKm": 12,
-        "imgurl": "http://www.sagmart.com/car-images/royal-enfield-bullet/appearance-bullet.jpg"
+        "imgurl": "http://www.sagmart.com/car-images/royal-enfield-bullet/appearance-bullet.jpg",
+        "reviews":[{
+            "comment":"You get it for the sound!!",
+            "rating":4
         },
         {
-        "name": "Fazer",
-        "maker": "Yamaha",
-        "availableFrom": "17/10/2018",
-        "chargesPerKm": 10,
-        "imgurl": "https://cdn1.droom.in//photos/mmt_gallery/2241/_nd3913411120170728.jpg"
-        },
-        {
-        "name": "Pulsar 220",
-        "maker": "Bajaj",
-        "availableFrom": "17/10/2018",
-        "chargesPerKm": 10,
-        "imgurl": "https://www.thrustzone.com/wp-content/uploads/sansys_photo_gallery/307/2017-Bajaj-Pulsar-220-BSIV-Review-12.jpg"
-        },
-        {
-        "name": "Bullet Classic 350",
-        "maker": "Royal Enfield",
-        "availableFrom": "17/10/2018",
-        "chargesPerKm": 12,
-        "imgurl": "http://www.sagmart.com/car-images/royal-enfield-bullet/appearance-bullet.jpg"
-        },
-        {
-        "name": "Fazer",
-        "maker": "Yamaha",
-        "availableFrom": "17/10/2018",
-        "chargesPerKm": 10,
-        "imgurl": "https://cdn1.droom.in//photos/mmt_gallery/2241/_nd3913411120170728.jpg"
-        },
-        {
-        "name": "Pulsar 220",
-        "maker": "Bajaj",
-        "availableFrom": "17/10/2018",
-        "chargesPerKm": 10,
-        "imgurl": "https://www.thrustzone.com/wp-content/uploads/sansys_photo_gallery/307/2017-Bajaj-Pulsar-220-BSIV-Review-12.jpg"
-        },
-        {
-        "name": "Bullet Classic 350",
-        "maker": "Royal Enfield",
-        "availableFrom": "17/10/2018",
-        "chargesPerKm": 12,
-        "imgurl": "http://www.sagmart.com/car-images/royal-enfield-bullet/appearance-bullet.jpg"
-        },
-        {
-        "name": "Fazer",
-        "maker": "Yamaha",
-        "availableFrom": "17/10/2018",
-        "chargesPerKm": 10,
-        "imgurl": "https://cdn1.droom.in//photos/mmt_gallery/2241/_nd3913411120170728.jpg"
-        },
-        {
-        "name": "Pulsar 220",
-        "maker": "Bajaj",
-        "availableFrom": "17/10/2018",
-        "chargesPerKm": 10,
-        "imgurl": "https://www.thrustzone.com/wp-content/uploads/sansys_photo_gallery/307/2017-Bajaj-Pulsar-220-BSIV-Review-12.jpg"
+            "comment":"Very heavy. Not worth it.",
+            "rating":2
+        }]
         }
     ],
     "scooters": [{
@@ -83,18 +51,42 @@
         "maker": "Honda",
         "availableFrom": "17/10/2018",
         "chargesPerKm": 10,
-        "imgurl": "http://resize.indiatvnews.com/en/resize/newbucket/715_-/2016/07/hoda-activa-1469096847.jpg"
+        "imgurl": "http://resize.indiatvnews.com/en/resize/newbucket/715_-/2016/07/hoda-activa-1469096847.jpg",
+        "reviews":[{
+            "comment":"Tried and tested honda. Best for the city",
+            "rating":4
+        },
+        {
+            "comment":"Its good but boring!",
+            "rating":2
+        }]
       }, {
         "name": "Access 125",
         "maker": "Suzuki",
         "availableFrom": "17/10/2018",
         "chargesPerKm": 10,
-        "imgurl": "http://resize.indiatvnews.com/en/resize/newbucket/715_-/2016/07/hoda-activa-1469096847.jpg"
+        "imgurl": "http://resize.indiatvnews.com/en/resize/newbucket/715_-/2016/07/hoda-activa-1469096847.jpg",
+        "reviews":[{
+            "comment":"Its a good looking bike and affordable.",
+            "rating":4
+        },
+        {
+            "comment":"Not every one is fan of how it looks. Does the job though!",
+            "rating":2
+        }]
       }, {
         "name": "Maestro",
         "maker": "Mahindra",
         "availableFrom": "17/10/2018",
         "chargesPerKm": 12,
-        "imgurl": "http://resize.indiatvnews.com/en/resize/newbucket/715_-/2016/07/hoda-activa-1469096847.jpg"
+        "imgurl": "http://resize.indiatvnews.com/en/resize/newbucket/715_-/2016/07/hoda-activa-1469096847.jpg",
+        "reviews":[{
+            "comment":"Nice bike. Lots of space.",
+            "rating":4
+        },
+        {
+            "comment":"Good one and rides much lower than the other bikes",
+            "rating":2
+        }]
       }]
 }
