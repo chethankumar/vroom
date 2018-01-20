@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Font } from 'expo';
 import Home from './src/components/Home/Home';
-import { Constants } from 'expo';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -30,7 +29,6 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        {/* <View style={styles.statusBar} /> */}
         {this.state.fontLoaded ?
           <Home />
         : null}
@@ -44,11 +42,4 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  // statusBar: {
-  //   backgroundColor: '#fff',
-  //   height: Constants.statusBarHeight,
-  //   elevation: 0,
-  //   shadowOffset:{width: 0, height: 0},
-  //   shadowOpacity: 0,
-  // },
 });

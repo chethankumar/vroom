@@ -4,6 +4,7 @@ import { StackNavigator } from 'react-navigation';
 import moment from 'moment';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Spinner from 'react-native-loading-spinner-overlay';
+import { Constants } from 'expo';
 import {
   Container,
   Header,
@@ -95,6 +96,7 @@ export class Home extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <Container style={{ shadowColor: '#fff' }}>
+        <View style={styles.statusBar} />
         <Spinner visible={this.state.bikeList.length === 0} />
         <ScrollView>
           {this.renderSelectedTab()}
