@@ -1,5 +1,9 @@
 {
   "expo": {
-    "sdkVersion": "23.0.0"
+    "sdkVersion": "23.0.0",
+    "splash":{
+      "image":"./src/assets/images/vroom.png",
+      "resizeMode": "cover"
+    }
   }
 }

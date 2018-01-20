@@ -3,7 +3,7 @@ import { View, ScrollView } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import moment from 'moment';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-
+import Spinner from 'react-native-loading-spinner-overlay';
 import {
   Container,
   Header,
@@ -20,6 +20,7 @@ import {
 import styles from './style';
 import VehicleList from '../List/List';
 import BikeDetail from '../BikeDetail/BikeDetail';
+import { getAllBikes, getAllScooters } from '../../api/Api';
 
 const defaultProps = {
   list: ['bikes', 'scooters'],
@@ -27,13 +28,11 @@ const defaultProps = {
 
 export class Home extends React.Component {
   static navigationOptions = {
-      header: null,
-      topBarShadowOpacity: 0,
-    // headerStyle: {
-    // { visible:false },
-    //   backgroundColor: '#ffffff',
-    //   borderBottomColor: '#fff',
-    // },
+    headerStyle: {
+      backgroundColor: '#ffffff',
+      borderBottomColor: '#fff',
+      shadow: 'none',
+    },
   };
 
   constructor(props) {
@@ -45,95 +44,27 @@ export class Home extends React.Component {
 
     this.state = {
       selectedTab: 'bikes',
-      bikeList: [{
-        name: 'Fazer',
-        maker: 'Yamaha',
-        availableFrom: '17/10/2018',
-        chargesPerKm: 10,
-        imgurl: 'https://cdn1.droom.in//photos/mmt_gallery/2241/_nd3913411120170728.jpg',
-      }, {
-        name: 'Pulsar 220',
-        maker: 'Bajaj',
-        availableFrom: '17/10/2018',
-        chargesPerKm: 10,
-        imgurl: 'https://www.thrustzone.com/wp-content/uploads/sansys_photo_gallery/307/2017-Bajaj-Pulsar-220-BSIV-Review-12.jpg',
-      }, {
-        name: 'Bullet Classic 350',
-        maker: 'Royal Enfield',
-        availableFrom: '17/10/2018',
-        chargesPerKm: 12,
-        imgurl: 'http://www.sagmart.com/car-images/royal-enfield-bullet/appearance-bullet.jpg',
-      }, {
-        name: 'Fazer',
-        maker: 'Yamaha',
-        availableFrom: '17/10/2018',
-        chargesPerKm: 10,
-        imgurl: 'https://cdn1.droom.in//photos/mmt_gallery/2241/_nd3913411120170728.jpg',
-      }, {
-        name: 'Pulsar 220',
-        maker: 'Bajaj',
-        availableFrom: '17/10/2018',
-        chargesPerKm: 10,
-        imgurl: 'https://www.thrustzone.com/wp-content/uploads/sansys_photo_gallery/307/2017-Bajaj-Pulsar-220-BSIV-Review-12.jpg',
-      }, {
-        name: 'Bullet Classic 350',
-        maker: 'Royal Enfield',
-        availableFrom: '17/10/2018',
-        chargesPerKm: 12,
-        imgurl: 'http://www.sagmart.com/car-images/royal-enfield-bullet/appearance-bullet.jpg',
-      }, {
-        name: 'Fazer',
-        maker: 'Yamaha',
-        availableFrom: '17/10/2018',
-        chargesPerKm: 10,
-        imgurl: 'https://cdn1.droom.in//photos/mmt_gallery/2241/_nd3913411120170728.jpg',
-      }, {
-        name: 'Pulsar 220',
-        maker: 'Bajaj',
-        availableFrom: '17/10/2018',
-        chargesPerKm: 10,
-        imgurl: 'https://www.thrustzone.com/wp-content/uploads/sansys_photo_gallery/307/2017-Bajaj-Pulsar-220-BSIV-Review-12.jpg',
-      }, {
-        name: 'Bullet Classic 350',
-        maker: 'Royal Enfield',
-        availableFrom: '17/10/2018',
-        chargesPerKm: 12,
-        imgurl: 'http://www.sagmart.com/car-images/royal-enfield-bullet/appearance-bullet.jpg',
-      }, {
-        name: 'Fazer',
-        maker: 'Yamaha',
-        availableFrom: '17/10/2018',
-        chargesPerKm: 10,
-        imgurl: 'https://cdn1.droom.in//photos/mmt_gallery/2241/_nd3913411120170728.jpg',
-      }, {
-        name: 'Pulsar 220',
-        maker: 'Bajaj',
-        availableFrom: '17/10/2018',
-        chargesPerKm: 10,
-        imgurl: 'https://www.thrustzone.com/wp-content/uploads/sansys_photo_gallery/307/2017-Bajaj-Pulsar-220-BSIV-Review-12.jpg',
-      }],
-      scooterList: [{
-        name: 'Activa',
-        maker: 'Honda',
-        availableFrom: '17/10/2018',
-        chargesPerKm: 10,
-        imgurl: 'http://resize.indiatvnews.com/en/resize/newbucket/715_-/2016/07/hoda-activa-1469096847.jpg',
-      }, {
-        name: 'Access 125',
-        maker: 'Suzuki',
-        availableFrom: '17/10/2018',
-        chargesPerKm: 10,
-        imgurl: 'http://resize.indiatvnews.com/en/resize/newbucket/715_-/2016/07/hoda-activa-1469096847.jpg',
-      }, {
-        name: 'Maestro',
-        maker: 'Mahindra',
-        availableFrom: '17/10/2018',
-        chargesPerKm: 12,
-        imgurl: 'http://resize.indiatvnews.com/en/resize/newbucket/715_-/2016/07/hoda-activa-1469096847.jpg',
-      }],
+      bikeList: [],
+      scooterList: [],
     };
   }
 
+  componentDidMount() {
+    getAllBikes((err, data) => {
+      if (data) {
+        this.setState({
+          bikeList: data,
+        });
+      }
+    });
+    getAllScooters((err, data) => {
+      if (data) {
+        this.setState({
+          scooterList: data,
+        });
+      }
+    });
+  }
 
   showDeatil(details) {
     this.props.navigation.navigate('BikeDetail', { details });
@@ -144,6 +75,7 @@ export class Home extends React.Component {
       case 'bikes':
         return (<VehicleList
           listToRender={this.state.bikeList}
+        // listToRender={() => getAllBikes() || this.state.bikeList}
           selectedType="Bikes"
           onTap={(details) => { this.showDeatil(details); }}
         />);
@@ -162,8 +94,8 @@ export class Home extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-        <Container>
-        <View style={styles.statusBar} />
+      <Container style={{ shadowColor: '#fff' }}>
+        <Spinner visible={this.state.bikeList.length === 0} />
         <ScrollView>
           {this.renderSelectedTab()}
         </ScrollView>
@@ -196,6 +128,6 @@ export default StackNavigator({
     screen: BikeDetail,
   },
 }, {
-  headerMode: 'float',
+  headerMode: 'none',
 });
 
