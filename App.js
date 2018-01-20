@@ -30,7 +30,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.statusBar} />
+        {/* <View style={styles.statusBar} /> */}
         {this.state.fontLoaded ?
           <Home />
         : null}
@@ -44,8 +44,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  statusBar: {
-    backgroundColor: '#fff',
-    height: Constants.statusBarHeight,
-  },
+  // statusBar: {
+  //   backgroundColor: '#fff',
+  //   height: Constants.statusBarHeight,
+  //   elevation: 0,
+  //   shadowOffset:{width: 0, height: 0},
+  //   shadowOpacity: 0,
+  // },
 });

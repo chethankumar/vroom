@@ -27,10 +27,13 @@ const defaultProps = {
 
 export class Home extends React.Component {
   static navigationOptions = {
-    headerStyle: {
-      backgroundColor: '#ffffff',
-      borderBottomColor: '#fff',
-    },
+      header: null,
+      topBarShadowOpacity: 0,
+    // headerStyle: {
+    // { visible:false },
+    //   backgroundColor: '#ffffff',
+    //   borderBottomColor: '#fff',
+    // },
   };
 
   constructor(props) {
@@ -158,7 +161,8 @@ export class Home extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <Container>
+        <Container>
+        <View style={styles.statusBar} />
         <ScrollView>
           {this.renderSelectedTab()}
         </ScrollView>
