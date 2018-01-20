@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   back: {
     backgroundColor: 'transparent',
-    paddingTop: 20,
+    paddingTop: 40,
     paddingLeft: 6,
   },
 });

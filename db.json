@@ -7,10 +7,12 @@
         "chargesPerKm": 10,
         "imgurl": "https://cdn1.droom.in//photos/mmt_gallery/2241/_nd3913411120170728.jpg",
         "reviews":[{
+            "reviewer":"Chethan",
             "comment":"Its a pretty fast bike and you can zip through the city easily",
             "rating":4
         },
         {
+            "reviewer":"Sangeet",
             "comment":"Its a bit on the heavy side but powerful",
             "rating":2
         }]
@@ -22,10 +24,12 @@
         "chargesPerKm": 10,
         "imgurl": "https://www.thrustzone.com/wp-content/uploads/sansys_photo_gallery/307/2017-Bajaj-Pulsar-220-BSIV-Review-12.jpg",
         "reviews":[{
+            "reviewer":"Sangeet",
             "comment":"Its a good looking bike with a fixed front.",
             "rating":4
         },
         {
+            "reviewer":"Geet",
             "comment":"Not every one is fan of how it looks. Does the job though!",
             "rating":2
         }]
@@ -37,10 +41,12 @@
         "chargesPerKm": 12,
         "imgurl": "http://www.sagmart.com/car-images/royal-enfield-bullet/appearance-bullet.jpg",
         "reviews":[{
+            "reviewer":"Sangeet",
             "comment":"You get it for the sound!!",
             "rating":4
         },
         {
+            "reviewer":"Geet",
             "comment":"Very heavy. Not worth it.",
             "rating":2
         }]
@@ -53,10 +59,12 @@
         "chargesPerKm": 10,
         "imgurl": "http://resize.indiatvnews.com/en/resize/newbucket/715_-/2016/07/hoda-activa-1469096847.jpg",
         "reviews":[{
+            "reviewer":"Vivin",
             "comment":"Tried and tested honda. Best for the city",
             "rating":4
         },
         {
+            "reviewer":"Ram",
             "comment":"Its good but boring!",
             "rating":2
         }]
@@ -67,10 +75,12 @@
         "chargesPerKm": 10,
         "imgurl": "http://resize.indiatvnews.com/en/resize/newbucket/715_-/2016/07/hoda-activa-1469096847.jpg",
         "reviews":[{
+            "reviewer":"Sangeet",
             "comment":"Its a good looking bike and affordable.",
             "rating":4
         },
         {
+            "reviewer":"Geet",
             "comment":"Not every one is fan of how it looks. Does the job though!",
             "rating":2
         }]
@@ -81,10 +91,12 @@
         "chargesPerKm": 12,
         "imgurl": "http://resize.indiatvnews.com/en/resize/newbucket/715_-/2016/07/hoda-activa-1469096847.jpg",
         "reviews":[{
+            "reviewer":"Sangeet",
             "comment":"Nice bike. Lots of space.",
             "rating":4
         },
         {
+            "reviewer":"Sangeet",
             "comment":"Good one and rides much lower than the other bikes",
             "rating":2
         }]
