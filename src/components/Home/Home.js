@@ -30,6 +30,7 @@ export class Home extends React.Component {
     headerStyle: {
       backgroundColor: '#ffffff',
       borderBottomColor: '#fff',
+      shadow: 'none',
     },
   };
 
@@ -159,7 +160,7 @@ export class Home extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <Container>
+      <Container style={{ shadowColor: '#fff' }}>
         <ScrollView>
           {this.renderSelectedTab()}
         </ScrollView>
@@ -192,6 +193,6 @@ export default StackNavigator({
     screen: BikeDetail,
   },
 }, {
-  headerMode: 'float',
+  headerMode: 'none',
 });
 
