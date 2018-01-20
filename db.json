@@ -1,0 +1,81 @@
+{
+    "Bikes": [
+        {
+        "name": "Fazer",
+        "maker": "Yamaha",
+        "availableFrom": "17/10/2018",
+        "chargesPerKm": 10,
+        "imgurl": "https: //cdn1.droom.in//photos/mmt_gallery/2241/_nd3913411120170728.jpg"
+        },
+        {
+        "name": "Pulsar 220",
+        "maker": "Bajaj",
+        "availableFrom": "17/10/2018",
+        "chargesPerKm": 10,
+        "imgurl": "https: //www.thrustzone.com/wp-content/uploads/sansys_photo_gallery/307/2017-Bajaj-Pulsar-220-BSIV-Review-12.jpg"
+        },
+        {
+        "name": "Bullet Classic 350",
+        "maker": "Royal Enfield",
+        "availableFrom": "17/10/2018",
+        "chargesPerKm": 12,
+        "imgurl": "http: //www.sagmart.com/car-images/royal-enfield-bullet/appearance-bullet.jpg"
+        },
+        {
+        "name": "Fazer",
+        "maker": "Yamaha",
+        "availableFrom": "17/10/2018",
+        "chargesPerKm": 10,
+        "imgurl": "https: //cdn1.droom.in//photos/mmt_gallery/2241/_nd3913411120170728.jpg"
+        },
+        {
+        "name": "Pulsar 220",
+        "maker": "Bajaj",
+        "availableFrom": "17/10/2018",
+        "chargesPerKm": 10,
+        "imgurl": "https: //www.thrustzone.com/wp-content/uploads/sansys_photo_gallery/307/2017-Bajaj-Pulsar-220-BSIV-Review-12.jpg"
+        },
+        {
+        "name": "Bullet Classic 350",
+        "maker": "Royal Enfield",
+        "availableFrom": "17/10/2018",
+        "chargesPerKm": 12,
+        "imgurl": "http: //www.sagmart.com/car-images/royal-enfield-bullet/appearance-bullet.jpg"
+        },
+        {
+        "name": "Fazer",
+        "maker": "Yamaha",
+        "availableFrom": "17/10/2018",
+        "chargesPerKm": 10,
+        "imgurl": "https: //cdn1.droom.in//photos/mmt_gallery/2241/_nd3913411120170728.jpg"
+        },
+        {
+        "name": "Pulsar 220",
+        "maker": "Bajaj",
+        "availableFrom": "17/10/2018",
+        "chargesPerKm": 10,
+        "imgurl": "https: //www.thrustzone.com/wp-content/uploads/sansys_photo_gallery/307/2017-Bajaj-Pulsar-220-BSIV-Review-12.jpg"
+        },
+        {
+        "name": "Bullet Classic 350",
+        "maker": "Royal Enfield",
+        "availableFrom": "17/10/2018",
+        "chargesPerKm": 12,
+        "imgurl": "http: //www.sagmart.com/car-images/royal-enfield-bullet/appearance-bullet.jpg"
+        },
+        {
+        "name": "Fazer",
+        "maker": "Yamaha",
+        "availableFrom": "17/10/2018",
+        "chargesPerKm": 10,
+        "imgurl": "https: //cdn1.droom.in//photos/mmt_gallery/2241/_nd3913411120170728.jpg"
+        },
+        {
+        "name": "Pulsar 220",
+        "maker": "Bajaj",
+        "availableFrom": "17/10/2018",
+        "chargesPerKm": 10,
+        "imgurl": "https: //www.thrustzone.com/wp-content/uploads/sansys_photo_gallery/307/2017-Bajaj-Pulsar-220-BSIV-Review-12.jpg"
+        }
+    ]
+}

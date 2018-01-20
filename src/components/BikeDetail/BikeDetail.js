@@ -19,23 +19,6 @@ import theme from '../common/theme';
 import styles from './BikeDetailStyle';
 
 export class BikeDetail extends React.Component {
-  static navigationOptions =({ navigation }) => ({
-    headerStyle: {
-      backgroundColor: '#fff',
-      borderBottomColor: '#fff',
-    },
-    // header: <Image resizeMode="cover" source={{ uri: navigation.state.params.details.imgurl }} style={styles.image} />,
-    headerLeft: (<TouchableOpacity onPress={() => { navigation.goBack(null); }}>
-      <MaterialCommunityIcons
-        name="arrow-left"
-        size={32}
-        color="#2874F0"
-      />
-                 </TouchableOpacity>),
-
-  });
-
-
   render() {
     return (
       <Container>
@@ -61,7 +44,7 @@ export class BikeDetail extends React.Component {
               </Text>
               <Text style={styles.text_normal}>
           Made by <Text style={styles.text_bold}>{this.props.navigation.state.params.details.maker}
-                  </Text>
+          </Text>
               </Text>
               <Text style={styles.text_normal} />
             </View>
