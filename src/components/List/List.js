@@ -26,7 +26,7 @@ export default class VehicleList extends React.Component {
             {this.props.selectedType === 'Bikes' ?
               <Image resizeMode="cover" source={{ uri: item.imgurl }} style={theme.image} />
                         :
-              <Image resizeMode="cover" source={{ uri: 'http://resize.indiatvnews.com/en/resize/newbucket/715_-/2016/07/hoda-activa-1469096847.jpg' }} style={theme.image} />
+              <Image resizeMode="cover" source={{ uri: item.imgurl }} style={theme.image} />
                     }
           </CardItem>
           <Text style={theme.text_bold}>{item.maker} {item.name}</Text>
@@ -39,7 +39,7 @@ export default class VehicleList extends React.Component {
             </Right>
           </CardItem>
         </Card>
-      </TouchableOpacity>);
+                       </TouchableOpacity>);
     });
 
     return (
