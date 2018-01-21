@@ -29,10 +29,11 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    alignItems: 'flex-start',
+    // alignItems: 'flex-start',
   },
   content: {
-    paddingTop: 290,
+    paddingTop: 250,
+    flex: 1,
   },
   back: {
     backgroundColor: 'transparent',

@@ -37,17 +37,23 @@ export class BikeDetail extends React.Component {
                 />
               </TouchableOpacity>
             </View>
-
-            <View style={styles.content}>
-              <Text style={theme.heading}>
-                {this.props.navigation.state.params.details.name}
-              </Text>
-              <Text style={styles.text_normal}>
-          Made by <Text style={styles.text_bold}>{this.props.navigation.state.params.details.maker}
-          </Text>
-              </Text>
-              <Text style={styles.text_normal} />
-            </View>
+            <Content>
+              <View style={styles.content}>
+                <Text style={theme.heading}>
+                  {this.props.navigation.state.params.details.name}
+                </Text>
+                <Text style={styles.text_normal}>
+                Made by
+                <Text style={styles.text_bold}>{this.props.navigation.state.params.details.maker}</Text>
+                </Text>
+                <Text style={styles.text_normal} />
+              </View>
+            </Content>
+            <Footer>
+              <Button full dark>
+                  <Text>Select Time</Text>
+                </Button>
+            </Footer>
           </View>
         </ScrollView>
       </Container>);
