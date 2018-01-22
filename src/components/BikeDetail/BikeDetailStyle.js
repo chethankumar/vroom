@@ -56,16 +56,21 @@ const styles = StyleSheet.create({
   buttonWrapper: {
     padding: 25,
   },
-
   detailsCard: {
     padding: 15,
     borderTopWidth: 0.5,
     borderBottomWidth: 0.5,
   },
-
+  aboutCard: {
+    padding: 15,
+  },
   detailsTextWrapper: {
     textAlign: 'center',
   },
+  reviewsCard:{
+    padding: 15,
+    borderTopWidth: 0.5,
+  }
 });
 
 export default styles;

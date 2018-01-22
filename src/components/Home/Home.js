@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Platform } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import moment from 'moment';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -102,20 +102,22 @@ export class Home extends React.Component {
           {this.renderSelectedTab()}
         </ScrollView>
         <Footer>
-          <FooterTab>
-            <Button
-              active={this.state.selectedTab === 'bikes'}
-              onPress={() => this.setState({ selectedTab: 'bikes' })}
-            >
-              <MaterialCommunityIcons name="motorbike" size={32} color="#2874F0" />
-            </Button>
-            <Button
-              active={this.state.selectedTab === 'scooters'}
-              onPress={() => this.setState({ selectedTab: 'scooters' })}
-            >
-              <Icon name="camera" />
-            </Button>
-          </FooterTab>
+          {Platform.OS === 'iOS' ?
+            <FooterTab>
+              <Button
+                active={this.state.selectedTab === 'bikes'}
+                onPress={() => this.setState({ selectedTab: 'bikes' })}
+              >
+                <MaterialCommunityIcons name="motorbike" size={32} color="#2874F0" />
+              </Button>
+              <Button
+                active={this.state.selectedTab === 'scooters'}
+                onPress={() => this.setState({ selectedTab: 'scooters' })}
+              >
+                <Icon name="camera" />
+              </Button>
+            </FooterTab>
+          : null}
         </Footer>
       </Container>
     );
