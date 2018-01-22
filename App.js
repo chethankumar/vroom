@@ -18,6 +18,7 @@ export default class App extends React.Component {
       Ionicons: require('@expo/vector-icons/fonts/Ionicons.ttf'),
       'Circular-Bold': require('./src/assets/fonts/CircularStd-Bold.otf'),
       Circular: require('./src/assets/fonts/CircularStd-Medium.otf'),
+      'Circular-Light':  require('./src/assets/fonts/CircularStd-Book.otf'),
     });
     this.setState({ fontLoaded: true });
   }

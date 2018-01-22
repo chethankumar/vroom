@@ -14,10 +14,15 @@ import {
   Footer,
   FooterTab,
   Right,
+  Card,
+  Grid,
+  Col,
 } from 'native-base';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import theme from '../common/theme';
 import styles from './BikeDetailStyle';
+import StarRating from 'react-native-star-rating';
+import BikeReviews from './BikeReviews';
 
 export class BikeDetail extends React.Component {
   render() {
@@ -43,15 +48,43 @@ export class BikeDetail extends React.Component {
               </Text>
               <Text style={styles.text_normal}>
                 Made by
-                <Text style={styles.text_bold}>{this.props.navigation.state.params.details.maker}</Text>
+                <Text style={styles.text_bold}> {this.props.navigation.state.params.details.maker}</Text>
               </Text>
               <Text style={styles.text_normal} />
             </View>
+            <Card style={[theme.noborder, theme.noshadow, theme.noelevation, styles.detailsCard]}>
+              <Grid>
+                <Col style={styles.detailsTextWrapper}>
+                  <Text style={[theme.text_bold, styles.detailsTextWrapper]}>{this.props.navigation.state.params.details.totalAvailable}</Text>
+                  <Text style={[theme.text_light, styles.detailsTextWrapper]}>available</Text>
+                </Col>
+                <Col style={styles.detailsTextWrapper}>
+                  <Text style={[theme.text_bold, styles.detailsTextWrapper]}>{this.props.navigation.state.params.details.kmsFree}</Text>
+                  <Text style={[theme.text_light, styles.detailsTextWrapper]}>kms free</Text>
+                </Col>
+                <Col style={styles.detailsTextWrapper}>
+                  <Text style={[theme.text_bold, styles.detailsTextWrapper]}>{this.props.navigation.state.params.details.chargesPerKm}₹</Text>
+                  <Text style={[theme.text_light, styles.detailsTextWrapper]}>charges after</Text>
+                </Col>
+              </Grid>
+            </Card>
+            <BikeReviews />
           </View>
         </ScrollView>
         <Footer style={styles.footer}>
-          <Left>
-            <Text>{this.props.navigation.state.params.details.baseTarrif}</Text>
+          <Left style={styles.buttonWrapper}>
+            <Text style={theme.text_normal}>INR {this.props.navigation.state.params.details.baseTarrif}</Text>
+            <StarRating
+              disabled={false}
+              emptyStar="ios-star-outline"
+              fullStar="ios-star"
+              halfStar="ios-star-half"
+              iconSet="Ionicons"
+              maxStars={5}
+              starSize={15}
+              rating={this.props.navigation.state.params.details.ratings}
+              starColor="#FF5722"
+            />
           </Left>
           <Right style={styles.buttonWrapper}>
             <Button full style={[theme.primary_btn]}>

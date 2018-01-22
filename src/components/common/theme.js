@@ -34,6 +34,11 @@ const theme = StyleSheet.create({
     fontFamily: 'Circular',
     fontWeight: '500',
   },
+  text_light: {
+    fontSize: 15,
+    fontFamily: 'Circular-Light',
+    fontWeight: '200',
+  },
   heading: {
     fontFamily: 'Circular-Bold',
     fontSize: 50,
@@ -47,6 +52,21 @@ const theme = StyleSheet.create({
     backgroundColor: '#FF5722',
     borderColor: '#FF5722',
     borderRadius: 2,
+  },
+  noshadow: {
+    shadowOffset: { width: 0, height: 0 },
+    shadowRadius: 0,
+  },
+  noelevation: {
+    elevation: 0,
+  },
+  noborder: {
+    borderWidth: 0,
+    borderRadius: 0,
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
+    borderRightWidth: 0,
+    borderLeftWidth: 0,
   },
 });
 
