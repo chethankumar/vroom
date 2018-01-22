@@ -43,6 +43,11 @@ const theme = StyleSheet.create({
     backgroundColor: '#fff',
     paddingTop: 0,
   },
+  primary_btn: {
+    backgroundColor: '#FF5722',
+    borderColor: '#FF5722',
+    borderRadius: 2,
+  },
 });
 
 export default theme;

@@ -13,6 +13,7 @@ import {
   Tabs,
   Footer,
   FooterTab,
+  Right,
 } from 'native-base';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import theme from '../common/theme';
@@ -22,7 +23,7 @@ export class BikeDetail extends React.Component {
   render() {
     return (
       <Container>
-        <ScrollView style={[theme.base_background]}>
+        <ScrollView style={[styles.wrapper, theme.base_background]}>
           <View style={styles.container}>
             <Image resizeMode="cover" source={{ uri: this.props.navigation.state.params.details.imgurl }} style={[styles.image, styles.backgroundContainer]} />
             <View style={styles.back}>
@@ -33,29 +34,31 @@ export class BikeDetail extends React.Component {
                   name="arrow-left"
                   size={32}
                   color="#fff"
-
                 />
               </TouchableOpacity>
             </View>
-            <Content>
-              <View style={styles.content}>
-                <Text style={theme.heading}>
-                  {this.props.navigation.state.params.details.name}
-                </Text>
-                <Text style={styles.text_normal}>
+            <View style={styles.content}>
+              <Text style={theme.heading}>
+                {this.props.navigation.state.params.details.name}
+              </Text>
+              <Text style={styles.text_normal}>
                 Made by
                 <Text style={styles.text_bold}>{this.props.navigation.state.params.details.maker}</Text>
-                </Text>
-                <Text style={styles.text_normal} />
-              </View>
-            </Content>
-            <Footer>
-              <Button full dark>
-                  <Text>Select Time</Text>
-                </Button>
-            </Footer>
+              </Text>
+              <Text style={styles.text_normal} />
+            </View>
           </View>
         </ScrollView>
+        <Footer style={styles.footer}>
+          <Left>
+            <Text>{this.props.navigation.state.params.details.baseTarrif}</Text>
+          </Left>
+          <Right style={styles.buttonWrapper}>
+            <Button full style={[theme.primary_btn]}>
+              <Text style={theme.text_normal}>Select Time</Text>
+            </Button>
+          </Right>
+        </Footer>
       </Container>);
   }
 }

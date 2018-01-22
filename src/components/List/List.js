@@ -13,7 +13,7 @@ export default class VehicleList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      interfaceType: 'grid',
+      interfaceType: 'list',
     };
 
     this.renderList = this.renderList.bind(this);
@@ -42,7 +42,7 @@ export default class VehicleList extends React.Component {
             </Right>
           </CardItem>
         </Card>
-      </TouchableOpacity>);
+                       </TouchableOpacity>);
     });
 
     return (
@@ -74,7 +74,7 @@ export default class VehicleList extends React.Component {
             </Right>
           </CardItem>
         </Card>
-      </TouchableOpacity>);
+                       </TouchableOpacity>);
     });
 
     return (

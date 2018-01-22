@@ -31,6 +31,9 @@ const styles = StyleSheet.create({
     flex: 1,
     // alignItems: 'flex-start',
   },
+  wrapper: {
+    flex: 1,
+  },
   content: {
     paddingTop: 250,
     flex: 1,
@@ -39,6 +42,19 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     paddingTop: 40,
     paddingLeft: 6,
+  },
+  footer: {
+    // position: 'absolute',
+    // bottom: 0,
+    backgroundColor: '#fff',
+    borderColor: '#fff',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    elevation: 1,
+  },
+  buttonWrapper: {
+    padding: 25,
   },
 });
 
