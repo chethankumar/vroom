@@ -70,9 +70,13 @@ export class BikeDetail extends React.Component {
             </Card>
             <Card style={[theme.noborder, theme.noshadow, theme.noelevation, styles.aboutCard]}>
               <Text style={[theme.text_normal]}>About the Bike</Text>
+              <Text />
               <Text style={[theme.text_light]}>{this.props.navigation.state.params.details.about}</Text>
             </Card>
-            <BikeReviews details={this.props.navigation.state.params.details}/>
+            <BikeReviews
+              style={{ backgroundColor: '#fff' }}
+              details={this.props.navigation.state.params.details}
+            />
           </View>
         </ScrollView>
         <Footer style={styles.footer}>
