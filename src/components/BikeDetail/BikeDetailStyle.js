@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderColor: '#fff',
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.5,
+    shadowOpacity: 0.9,
     shadowRadius: 2,
     elevation: 1,
   },
@@ -67,10 +67,13 @@ const styles = StyleSheet.create({
   detailsTextWrapper: {
     textAlign: 'center',
   },
-  reviewsCard:{
+  reviewsCard: {
     padding: 15,
     borderTopWidth: 0.5,
-  }
+  },
+  bookedText: {
+    color: '#FF5722',
+  },
 });
 
 export default styles;

@@ -35,13 +35,13 @@ const theme = StyleSheet.create({
     fontWeight: '500',
   },
   text_light: {
-    fontSize: 15,
-    fontFamily: 'Circular-Light',
+    fontSize: 16,
+    fontFamily: 'Calibre-Light',
     fontWeight: '200',
   },
   heading: {
     fontFamily: 'Circular-Bold',
-    fontSize: 50,
+    fontSize: 40,
     paddingLeft: 15,
   },
   base_background: {
@@ -50,6 +50,11 @@ const theme = StyleSheet.create({
   },
   primary_btn: {
     backgroundColor: '#FF5722',
+    borderColor: '#FF5722',
+    borderRadius: 2,
+  },
+  secondary_btn: {
+    backgroundColor: '#fff',
     borderColor: '#FF5722',
     borderRadius: 2,
   },
@@ -67,6 +72,19 @@ const theme = StyleSheet.create({
     borderBottomWidth: 0,
     borderRightWidth: 0,
     borderLeftWidth: 0,
+  },
+  text_regular: {
+    fontSize: 18,
+    fontFamily: 'Circular-Light',
+    fontWeight: '200',
+  },
+  text_regular_large: {
+    fontSize: 25,
+    fontFamily: 'Circular-Light',
+    fontWeight: '200',
+  },
+  theme_color: {
+    color: '#FF5722',
   },
 });
 

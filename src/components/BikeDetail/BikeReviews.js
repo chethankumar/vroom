@@ -36,7 +36,7 @@ export default class BikeReviews extends React.Component {
           <Left>
             <Thumbnail source={{ uri: this.props.details.imgurl }} />
             <Body>
-              <Text>{review.reviewer}</Text>
+              <Text style={[theme.text_normal]}>{review.reviewer}</Text>
               <View style={{ width: 60, justifyContent: 'space-around' }}>
                 <StarRating
                   disabled={false}
@@ -54,9 +54,9 @@ export default class BikeReviews extends React.Component {
           </Left>
         </CardItem>
         <CardItem cardBody>
-          <Text>{review.comment}</Text>
+          <Text style={[theme.text_light]}>{review.comment}</Text>
         </CardItem>
-      </Card>);
+                      </Card>);
     });
     return (
       <View>{reviewList}</View>

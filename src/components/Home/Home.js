@@ -102,8 +102,8 @@ export class Home extends React.Component {
           {this.renderSelectedTab()}
         </ScrollView>
         <Footer>
-          {Platform.OS === 'iOS' ?
-            <FooterTab>
+          {/* {Platform.OS === 'iOS' ? */}
+          <FooterTab>
               <Button
                 active={this.state.selectedTab === 'bikes'}
                 onPress={() => this.setState({ selectedTab: 'bikes' })}
@@ -117,7 +117,7 @@ export class Home extends React.Component {
                 <Icon name="camera" />
               </Button>
             </FooterTab>
-          : null}
+          {/* : null} */}
         </Footer>
       </Container>
     );

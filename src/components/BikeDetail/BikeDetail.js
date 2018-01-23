@@ -23,8 +23,38 @@ import theme from '../common/theme';
 import styles from './BikeDetailStyle';
 import StarRating from 'react-native-star-rating';
 import BikeReviews from './BikeReviews';
+import BookBike from './Bookbike';
 
 export class BikeDetail extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showBookModal: false,
+      isBooked: false,
+    };
+
+    this.showBookPage = this.showBookPage.bind(this);
+    this.hideBookPage = this.hideBookPage.bind(this);
+    this.bookAbike = this.bookAbike.bind(this);
+  }
+  showBookPage() {
+    this.setState({
+      showBookModal: true,
+    });
+  }
+  hideBookPage() {
+    this.setState({
+      showBookModal: false,
+    });
+  }
+  bookAbike() {
+    console.log('Booked!');
+    this.setState({
+      showBookModal: false,
+      isBooked: true,
+    });
+  }
   render() {
     return (
       <Container>
@@ -55,15 +85,15 @@ export class BikeDetail extends React.Component {
             <Card style={[theme.noborder, theme.noshadow, theme.noelevation, styles.detailsCard]}>
               <Grid>
                 <Col style={styles.detailsTextWrapper}>
-                  <Text style={[theme.text_bold, styles.detailsTextWrapper]}>{this.props.navigation.state.params.details.totalAvailable}</Text>
+                  <Text style={[theme.text_bold, styles.detailsTextWrapper, theme.theme_color]}>{this.props.navigation.state.params.details.totalAvailable}</Text>
                   <Text style={[theme.text_light, styles.detailsTextWrapper]}>available</Text>
                 </Col>
                 <Col style={styles.detailsTextWrapper}>
-                  <Text style={[theme.text_bold, styles.detailsTextWrapper]}>{this.props.navigation.state.params.details.kmsFree}</Text>
+                  <Text style={[theme.text_bold, styles.detailsTextWrapper, theme.theme_color]}>{this.props.navigation.state.params.details.kmsFree}</Text>
                   <Text style={[theme.text_light, styles.detailsTextWrapper]}>kms free</Text>
                 </Col>
                 <Col style={styles.detailsTextWrapper}>
-                  <Text style={[theme.text_bold, styles.detailsTextWrapper]}>{this.props.navigation.state.params.details.chargesPerKm}₹</Text>
+                  <Text style={[theme.text_bold, styles.detailsTextWrapper, theme.theme_color]}>{this.props.navigation.state.params.details.chargesPerKm}<Text style={[theme.text_regular_large, styles.detailsTextWrapper, theme.theme_color]}> ₹</Text></Text>
                   <Text style={[theme.text_light, styles.detailsTextWrapper]}>charges after</Text>
                 </Col>
               </Grid>
@@ -72,8 +102,9 @@ export class BikeDetail extends React.Component {
               <Text style={[theme.text_normal]}>About the Bike</Text>
               <Text style={[theme.text_light]}>{this.props.navigation.state.params.details.about}</Text>
             </Card>
-            <BikeReviews details={this.props.navigation.state.params.details}/>
+            <BikeReviews details={this.props.navigation.state.params.details} />
           </View>
+          <BookBike hideBookPage={this.hideBookPage} isShow={this.state.showBookModal} onBook={this.bookAbike} />
         </ScrollView>
         <Footer style={styles.footer}>
           <Left style={styles.buttonWrapper}>
@@ -91,9 +122,16 @@ export class BikeDetail extends React.Component {
             />
           </Left>
           <Right style={styles.buttonWrapper}>
-            <Button full style={[theme.primary_btn]}>
-              <Text style={theme.text_normal}>Select Time</Text>
-            </Button>
+            {this.state.isBooked ?
+              <Button full style={[theme.secondary_btn]}>
+                <Icon name="ios-checkmark-circle-outline" style={theme.theme_color} />
+                <Text style={[theme.text_normal, styles.bookedText]}>Booked</Text>
+              </Button>
+            :
+              <Button full style={[theme.primary_btn]} onPress={() => { this.showBookPage(); }}>
+                <Text style={theme.text_normal}>Select Time</Text>
+              </Button>
+            }
           </Right>
         </Footer>
       </Container>);
