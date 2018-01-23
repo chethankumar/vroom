@@ -3,7 +3,7 @@
     "sdkVersion": "23.0.0",
     "splash":{
       "image":"./src/assets/images/logo.png",
-      "resizeMode": "cover",
+      "resizeMode": "contain",
       "backgroundColor":"#FF5722"
     }
   }
