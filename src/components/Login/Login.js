@@ -18,13 +18,41 @@ import {
 } from 'native-base';
 import styles from './LoginStyles';
 import theme from '../common/theme';
+import { getData, saveData } from '../../api/db';
+import Home from '../Home/Home';
 
 export default class Login extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      userName: '',
+      userSaved: false,
+    };
+    this.createUser = this.createUser.bind(this);
+    this.onChangeUserName = this.onChangeUserName.bind(this);
+  }
+
+  componentDidMount() {
+    // const user = getData('userId');
+    // console.log(`User is ${user}`);
+  }
+
+  onChangeUserName(e) {
+    this.setState({ userName: e.nativeEvent.text });
+  }
+
+  createUser() {
+    console.log('saving user');
+    saveData('userId', { name: this.state.userName });
+    this.setState({
+      userSaved: true,
+    });
   }
 
   render() {
+    if (this.state.userSaved) {
+      return (<Home />);
+    }
     return (
       <Container style={{ shadowColor: '#fff' }}>
         <View style={styles.statusBar} />
@@ -42,14 +70,21 @@ export default class Login extends React.Component {
             <Content style={styles.formWrapper}>
               <Form>
                 <Item stackedLabel style={styles.formItem}>
-                  <Label style={[theme.text_normal, theme.invert_color]}>Username</Label>
-                  <Input />
+                  <Label style={[theme.text_regular, theme.invert_color]}>Username</Label>
+                  <Input
+                    style={[theme.text_normal, theme.invert_color]}
+                    onChange={e => this.onChangeUserName(e)}
+                  />
                 </Item>
                 <Item stackedLabel style={styles.formItem}>
-                  <Label style={[theme.text_normal, theme.invert_color]}>Password</Label>
-                  <Input />
+                  <Label style={[theme.text_regular, theme.invert_color]}>Password</Label>
+                  <Input secureTextEntry style={[theme.text_normal, theme.invert_color]} />
                 </Item>
-                <Button full style={[styles.createButton, styles.facebookButton]}>
+                <Button
+                  full
+                  style={[styles.createButton, styles.facebookButton]}
+                  onPress={() => this.createUser()}
+                >
                   <Text style={[theme.text_regular, theme.invert_color]}>Sign In</Text>
                 </Button>
               </Form>

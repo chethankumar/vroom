@@ -80,7 +80,7 @@ const theme = StyleSheet.create({
   },
   text_regular_large: {
     fontSize: 25,
-    fontFamily: 'Circular-Light',
+    fontFamily: 'Calibre-Light',
     fontWeight: '200',
   },
   theme_color: {
