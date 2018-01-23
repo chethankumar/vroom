@@ -83,7 +83,6 @@ export class Home extends React.Component {
       case 'bikes':
         return (<VehicleList
           listToRender={this.state.bikeList}
-        // listToRender={() => getAllBikes() || this.state.bikeList}
           selectedType="Bikes"
           onTap={(details) => { this.showDeatil(details); }}
         />);

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Font } from 'expo';
 import Home from './src/components/Home/Home';
 import Login from './src/components/Login/Login';
+import { getData } from './src/api/db';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -30,14 +31,24 @@ export default class App extends React.Component {
     Font.loadAsync({
       Roboto: require('native-base/Fonts/Roboto.ttf'),
     });
+
+    getData('userId', (err, data) => {
+      if (data && data.name) {
+        this.setState({
+          isLoggedIn: true,
+        });
+      }
+    });
     this.renderScreens = this.renderScreens.bind(this);
   }
+
   renderScreens() {
     if (this.state.isLoggedIn) {
       return (<Home />);
     }
     return (<Login />);
   }
+
   render() {
     return (
       <View style={styles.container}>

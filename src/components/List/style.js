@@ -22,6 +22,17 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0,
     borderWidth: 0,
   },
+  spreadContent: {
+    justifyContent: 'space-between',
+  },
+  alignItemRight: {
+    alignItems: 'flex-end',
+    flexDirection: 'column-reverse',
+    textAlign: 'right',
+    paddingRight: 20,
+    paddingTop: 22,
+  },
+
 });
 
 

@@ -1,9 +1,11 @@
 import React from 'react';
+import { Util } from 'expo';
 import { Text, Image, View, TouchableOpacity, StyleSheet } from 'react-native';
 import GridView from 'react-native-super-grid';
 import { List, ListItem, Card, CardItem, Body, Left, Icon, Right, Content, Row, Col, Grid, Container } from 'native-base';
 import theme from '../common/theme';
 import styles from './style';
+import { saveData } from '../../api/db';
 
 const defaultProps = {
   listToRender: [],
@@ -18,6 +20,12 @@ export default class VehicleList extends React.Component {
 
     this.renderList = this.renderList.bind(this);
     this.renderGrid = this.renderGrid.bind(this);
+    this.logout = this.logout.bind(this);
+  }
+
+  logout() {
+    saveData('userId', {});
+    Util.reload();
   }
 
   renderList() {
@@ -112,7 +120,15 @@ export default class VehicleList extends React.Component {
     return (
       <View style={styles.container}>
         <Content style={styles.contentStyle}>
-          <Text style={theme.heading}>{this.props.selectedType}</Text>
+          <Grid style={styles.spreadContent}>
+            <Col>
+              <Text style={theme.heading}>{this.props.selectedType}</Text>
+            </Col>
+            <Col>
+              <Text style={[theme.text_normal, styles.alignItemRight]} onPress={() => this.logout()}>Logout</Text>
+            </Col>
+          </Grid>
+
           {this.state.interfaceType === 'list' ?
           this.renderList()
           :
