@@ -22,6 +22,7 @@ import styles from './style';
 import VehicleList from '../List/List';
 import BikeDetail from '../BikeDetail/BikeDetail';
 import { getAllBikes, getAllScooters } from '../../api/Api';
+import AppLaunchService from '../../assets/applaunch';
 
 const defaultProps = {
   list: ['bikes', 'scooters'],
@@ -65,6 +66,12 @@ export class Home extends React.Component {
         });
       }
     });
+    const applaunchService = new AppLaunchService();
+    applaunchService.initialize('us-south', 'ad237ea7-f850-49d2-9f79-d926477dce19', 'f8adac30-ca10-4d72-96dc-afc47936a043', '4d70d456-a84a-4b80-8300-dabbbe99b942', null, { userId: 'chethan', platform: 'iOS' }, {}).then((res) => {
+      console.log(`init ${JSON.stringify(res)}`);
+    }).catch((err) => {
+      console.log(`err ${JSON.stringify(err)}`);
+    });
   }
 
   showDeatil(details) {
@@ -101,9 +108,9 @@ export class Home extends React.Component {
         <ScrollView>
           {this.renderSelectedTab()}
         </ScrollView>
-        <Footer>
-          {/* {Platform.OS === 'iOS' ? */}
-          <FooterTab>
+        {Platform.OS === 'ios' ?
+          <Footer>
+            <FooterTab>
               <Button
                 active={this.state.selectedTab === 'bikes'}
                 onPress={() => this.setState({ selectedTab: 'bikes' })}
@@ -117,8 +124,8 @@ export class Home extends React.Component {
                 <Icon name="camera" />
               </Button>
             </FooterTab>
-          {/* : null} */}
-        </Footer>
+          </Footer>
+          : null}
       </Container>
     );
   }
