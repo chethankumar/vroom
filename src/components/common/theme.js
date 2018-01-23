@@ -86,6 +86,12 @@ const theme = StyleSheet.create({
   theme_color: {
     color: '#FF5722',
   },
+  invert_color: {
+    color: '#fff',
+  },
+  theme_background: {
+    backgroundColor: '#FF5722',
+  },
 });
 
 export default theme;
