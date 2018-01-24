@@ -27,3 +27,9 @@ export function getData(key, callback) {
     return callback(err);
   });
 }
+
+export function deleteData(key) {
+  storage.remove({
+    key,
+  });
+}

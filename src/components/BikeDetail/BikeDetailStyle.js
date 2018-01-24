@@ -1,5 +1,6 @@
 
 import { StyleSheet } from 'react-native';
+import { Constants } from 'expo';
 
 const styles = StyleSheet.create({
   text_normal: {
@@ -84,6 +85,13 @@ const styles = StyleSheet.create({
   },
   testDriveBtn: {
     borderRadius: 50,
+  },
+  statusBar: {
+    backgroundColor: 'transparent',
+    height: Constants.statusBarHeight + 20,
+    elevation: 0,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0,
   },
 });
 

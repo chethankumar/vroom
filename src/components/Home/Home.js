@@ -162,7 +162,7 @@ export class Home extends React.Component {
                   active={this.state.selectedTab === 'bikes'}
                   onPress={() => this.setState({ selectedTab: 'bikes' })}
                 >
-                <Text style={[theme.text_regular, styles.footerText]}>Motorbike</Text>
+                <Text style={[theme.text_regular, styles.footerText]}>Motorbikes</Text>
                 {/* <Icon name="ios-bicycle" /> */}
                   {/* <MaterialCommunityIcons name="motorbike" size={32}  /> */}
                 </Button>
@@ -194,3 +194,4 @@ export default StackNavigator({
   headerMode: 'none',
 });
 
+ 

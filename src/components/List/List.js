@@ -5,7 +5,7 @@ import GridView from 'react-native-super-grid';
 import { List, ListItem, Card, CardItem, Body, Left, Icon, Right, Content, Row, Col, Grid, Container } from 'native-base';
 import theme from '../common/theme';
 import styles from './style';
-import { saveData } from '../../api/db';
+import { saveData, deleteData } from '../../api/db';
 
 const defaultProps = {
   listToRender: [],
@@ -25,6 +25,7 @@ export default class VehicleList extends React.Component {
 
   logout() {
     saveData('userId', {});
+    deleteData('booking');
     Util.reload();
   }
 

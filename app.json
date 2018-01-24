@@ -2,7 +2,7 @@
   "expo": {
     "sdkVersion": "23.0.0",
     "splash":{
-      "image":"./src/assets/images/logo.png",
+      "image":"./src/assets/images/vroom.png",
       "resizeMode": "contain",
       "backgroundColor":"#FF5722"
     }

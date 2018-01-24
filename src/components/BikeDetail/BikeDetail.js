@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Image, ScrollView, TouchableOpacity, Animated } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import {
   Container,
@@ -18,6 +18,7 @@ import {
   Grid,
   Col,
 } from 'native-base';
+import { getData, saveData } from '../../api/db';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import theme from '../common/theme';
 import styles from './BikeDetailStyle';
@@ -32,11 +33,44 @@ export class BikeDetail extends React.Component {
     this.state = {
       showBookModal: false,
       isBooked: false,
+      showStatusBar: false,
     };
 
     this.showBookPage = this.showBookPage.bind(this);
     this.hideBookPage = this.hideBookPage.bind(this);
     this.bookAbike = this.bookAbike.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
+  }
+
+  componentDidMount = () => {
+     getData('booking',(err,data)=>{
+        if (data && data.length > 0) {
+          data.map((item) => {
+            if (item.name === this.props.navigation.state.params.details.name) {
+              this.setState({
+                isBooked: true,
+              });
+            }
+          });
+        }
+    });
+    
+  }
+
+
+  handleScroll(event: Object) {
+    // console.log(event.nativeEvent.contentOffset.y);
+    // if (event.nativeEvent.contentOffset.y > 50) {
+    //   this._setAnimation(true);
+    //   this.setState({
+    //     showStatusBar: true,
+    //   });
+    // } else {
+    //   this._setAnimation(false);
+    //   this.setState({
+    //     showStatusBar: false,
+    //   });
+    // }
   }
   showBookPage() {
     this.setState({
@@ -54,11 +88,32 @@ export class BikeDetail extends React.Component {
       showBookModal: false,
       isBooked: true,
     });
+    let currentBooking = [];
+    getData('booking', (err,data)=>{
+      if(data && data.length > 0) {
+        currentBooking = data;
+      }
+      if (currentBooking && currentBooking.length > 0) {
+        currentBooking.push({
+          name: this.props.navigation.state.params.details.name,
+          booked: true,
+        });
+      } else {
+        currentBooking = [{
+          name: this.props.navigation.state.params.details.name,
+          booked: true,
+        }];
+      }
+      saveData('booking', currentBooking);
+    
+    });
+    
+    // booking: [{name: asdf, booked: '11/12'}]
   }
   render() {
     return (
       <Container>
-        <ScrollView style={[styles.wrapper, theme.base_background]}>
+        <ScrollView style={[styles.wrapper, theme.base_background]} onScroll={this.handleScroll}>
           <View style={styles.container}>
             <Image resizeMode="cover" source={{ uri: this.props.navigation.state.params.details.imgurl }} style={[styles.image, styles.backgroundContainer]} />
             <View style={styles.back}>
