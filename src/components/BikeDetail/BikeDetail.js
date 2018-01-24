@@ -82,6 +82,11 @@ export class BikeDetail extends React.Component {
               </Text>
               <Text style={styles.text_normal} />
             </View>
+            <View style={styles.testDriveWrapper}>
+              <Button full style={[theme.primary_btn, styles.testDriveBtn]}>
+                <Text style={[theme.text_normal, theme.invert_color]}>Book Test Drive</Text>
+              </Button>
+            </View>
             <Card style={[theme.noborder, theme.noshadow, theme.noelevation, styles.detailsCard]}>
               <Grid>
                 <Col style={styles.detailsTextWrapper}>

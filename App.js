@@ -11,7 +11,7 @@ export default class App extends React.Component {
 
     this.state = {
       fontLoaded: false,
-      isLoggedIn: true,
+      isLoggedIn: false,
     };
   }
   async componentWillMount() {

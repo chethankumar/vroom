@@ -18,6 +18,22 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0,
   },
+  footer: {
+    backgroundColor: '#fff',
+    borderColor: '#fff',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.9,
+    shadowRadius: 2,
+    elevation: 1,
+  },
+  footerTabBtn: {
+    borderRadius: 0,
+    borderRightWidth: 1,
+    borderColor: '#FF5722',
+  },
+  footerText: {
+    fontSize: 14,
+  },
 });
 
 export default styles;

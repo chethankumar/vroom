@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
     // width: 40,
   },
   createButton: {
-    backgroundColor: '#FF5722',
+    // backgroundColor: '#FF5722',
+    backgroundColor: 'transparent',
     borderColor: '#fff',
     borderWidth: 2,
     marginTop: 20,

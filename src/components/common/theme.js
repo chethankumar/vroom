@@ -57,6 +57,7 @@ const theme = StyleSheet.create({
     backgroundColor: '#fff',
     borderColor: '#FF5722',
     borderRadius: 2,
+    borderWidth: 2,
   },
   noshadow: {
     shadowOffset: { width: 0, height: 0 },

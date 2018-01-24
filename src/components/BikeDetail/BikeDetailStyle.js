@@ -76,6 +76,15 @@ const styles = StyleSheet.create({
   bookedText: {
     color: '#FF5722',
   },
+  testDriveWrapper: {
+    padding: 20,
+    // borderBottomWidth: 1,
+    // borderTopWidth: 1,
+    // borderColor: '#ccc',
+  },
+  testDriveBtn: {
+    borderRadius: 50,
+  },
 });
 
 export default styles;
