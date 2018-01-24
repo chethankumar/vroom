@@ -1,6 +1,14 @@
 {
   "expo": {
+    "name":"Vrooom",
     "sdkVersion": "23.0.0",
+    "icon": "./src/assets/images/logo.png",
+    "ios": {
+      "bundleIdentifier": "com.applaunch.vroom"
+    },
+    "android": {
+      "package": "com.applaunch.vroom"
+    },
     "splash":{
       "image":"./src/assets/images/vroom.png",
       "resizeMode": "contain",
