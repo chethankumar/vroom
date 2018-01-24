@@ -3,6 +3,7 @@ import { Util } from 'expo';
 import { Text, Image, View, TouchableOpacity, StyleSheet } from 'react-native';
 import GridView from 'react-native-super-grid';
 import { List, ListItem, Card, CardItem, Body, Left, Icon, Right, Content, Row, Col, Grid, Container } from 'native-base';
+import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import theme from '../common/theme';
 import styles from './style';
 import { saveData, deleteData } from '../../api/db';

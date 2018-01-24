@@ -18,6 +18,7 @@ import {
   Grid,
   Col,
 } from 'native-base';
+import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import { getData, saveData } from '../../api/db';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import theme from '../common/theme';
@@ -43,18 +44,17 @@ export class BikeDetail extends React.Component {
   }
 
   componentDidMount = () => {
-     getData('booking',(err,data)=>{
-        if (data && data.length > 0) {
-          data.map((item) => {
-            if (item.name === this.props.navigation.state.params.details.name) {
-              this.setState({
-                isBooked: true,
-              });
-            }
-          });
-        }
+    getData('booking', (err, data) => {
+      if (data && data.length > 0) {
+        data.map((item) => {
+          if (item.name === this.props.navigation.state.params.details.name) {
+            this.setState({
+              isBooked: true,
+            });
+          }
+        });
+      }
     });
-    
   }
 
 
@@ -89,8 +89,8 @@ export class BikeDetail extends React.Component {
       isBooked: true,
     });
     let currentBooking = [];
-    getData('booking', (err,data)=>{
-      if(data && data.length > 0) {
+    getData('booking', (err, data) => {
+      if (data && data.length > 0) {
         currentBooking = data;
       }
       if (currentBooking && currentBooking.length > 0) {
@@ -105,28 +105,36 @@ export class BikeDetail extends React.Component {
         }];
       }
       saveData('booking', currentBooking);
-    
     });
-    
+
     // booking: [{name: asdf, booked: '11/12'}]
   }
   render() {
     return (
       <Container>
-        <ScrollView style={[styles.wrapper, theme.base_background]} onScroll={this.handleScroll}>
-          <View style={styles.container}>
-            <Image resizeMode="cover" source={{ uri: this.props.navigation.state.params.details.imgurl }} style={[styles.image, styles.backgroundContainer]} />
-            <View style={styles.back}>
-              <TouchableOpacity
-                onPress={() => { this.props.navigation.goBack(null); }}
-              >
-                <MaterialCommunityIcons
-                  name="arrow-left"
-                  size={32}
-                  color="#fff"
-                />
-              </TouchableOpacity>
+        <ParallaxScrollView
+          style={[styles.wrapper, theme.base_background]}
+          onScroll={this.handleScroll}
+          parallaxHeaderHeight={300}
+          backgroundColor="#FF5722"
+          renderForeground={() => (
+            <View style={styles.container}>
+              <Image resizeMode="cover" source={{ uri: this.props.navigation.state.params.details.imgurl }} style={[styles.image, styles.backgroundContainer]} />
+              <View style={styles.back}>
+                <TouchableOpacity
+                  onPress={() => { this.props.navigation.goBack(null); }}
+                >
+                  <MaterialCommunityIcons
+                    name="arrow-left"
+                    size={32}
+                    color="#fff"
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
+           )}
+        >
+          <View style={styles.container}>
             <View style={styles.content}>
               <Text style={theme.heading}>
                 {this.props.navigation.state.params.details.name}
@@ -169,7 +177,7 @@ export class BikeDetail extends React.Component {
             />
           </View>
           <BookBike hideBookPage={this.hideBookPage} isShow={this.state.showBookModal} onBook={this.bookAbike} />
-        </ScrollView>
+        </ParallaxScrollView>
         <Footer style={styles.footer}>
           <Left style={styles.buttonWrapper}>
             <Text style={theme.text_normal}>INR {this.props.navigation.state.params.details.baseTarrif}</Text>

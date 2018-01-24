@@ -34,6 +34,7 @@
     "react-native": "0.50.3",
     "react-native-loading-spinner-overlay": "^0.5.2",
     "react-native-modal-datetime-picker": "^4.13.0",
+    "react-native-parallax-scroll-view": "^0.20.1",
     "react-native-star-rating": "^1.0.8",
     "react-native-storage": "^0.2.2",
     "react-native-super-grid": "^2.0.2",
