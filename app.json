@@ -3,6 +3,7 @@
     "name":"Vrooom",
     "sdkVersion": "23.0.0",
     "icon": "./src/assets/images/logo.png",
+    "version": "1.0.0",
     "ios": {
       "bundleIdentifier": "com.applaunch.vroom"
     },
