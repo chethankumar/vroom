@@ -58,13 +58,14 @@ export default class Login extends React.Component {
         <View style={styles.statusBar} />
         <View style={styles.view}>
           <LinearGradient
-            colors={['#ff5722d4', '#ff5722e6', '#FF5722']}
+            colors={['#ff5722d4', '#ff5722e6', '#FF5A5F']}
             style={styles.contentContainer}
             start={{ x: 0, y: 1 }}
             end={{ x: 1, y: 0 }}
           >
             <View style={styles.imageContainer}>
-              <Image resizeMode="contain" source={{ uri: 'https://i.imgur.com/dzu25yR.png' }} style={styles.image} />
+              {/* https://i.imgur.com/dzu25yR.png */}
+              <Image resizeMode="contain" source={require('../../assets/images/logo.png')} style={styles.image} />
             </View>
             <Text style={[theme.text_regular_large, styles.intro]}>Welcome to Vrooom.</Text>
             <Content style={styles.formWrapper}>
