@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderColor: '#fff',
     borderWidth: 2,
-    marginTop: 20,
+    marginTop: 60,
     marginBottom: 20,
   },
   formWrapper: {

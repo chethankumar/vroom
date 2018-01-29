@@ -18,6 +18,21 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0,
   },
+  statusBarAndroid: {
+    backgroundColor: '#FF5722',
+    height: Constants.statusBarHeight,
+    elevation: 0,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0,
+  },
+  header: {
+    backgroundColor: '#FF5722',
+  },
+  footerAndroid:{
+    backgroundColor: '#fff',
+    borderColor: '#ccc',
+    elevation: 50,
+  },
   footer: {
     backgroundColor: '#fff',
     borderColor: '#fff',
@@ -30,6 +45,11 @@ const styles = StyleSheet.create({
     borderRadius: 0,
     borderRightWidth: 1,
     borderColor: '#FF5722',
+    flex: 1,
+    height: 50,
+  },
+  footerTab:{
+    flex: 1,
   },
   footerText: {
     fontSize: 14,

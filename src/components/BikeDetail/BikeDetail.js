@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, ScrollView, TouchableOpacity, Animated } from 'react-native';
+import { View, Image, ScrollView, TouchableOpacity, Animated, Platform } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import {
   Container,
@@ -34,6 +34,7 @@ export class BikeDetail extends React.Component {
 
     this.state = {
       showBookModal: false,
+      showTestBookModal: false,
       isBooked: false,
       showStatusBar: false,
       bookingPosition: 'sticky',
@@ -47,9 +48,13 @@ export class BikeDetail extends React.Component {
     this.hideBookPage = this.hideBookPage.bind(this);
     this.bookAbike = this.bookAbike.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
+    this.showTestBookPage = this.showTestBookPage.bind(this);
+    this.hideTestBookPage = this.hideTestBookPage.bind(this);
+    this.bookTestdrive = this.bookTestdrive.bind(this);
   }
 
   componentDidMount = () => {
+    // check for bookings
     getData('booking', (err, data) => {
       if (data && data.length > 0) {
         data.map((item) => {
@@ -107,6 +112,43 @@ export class BikeDetail extends React.Component {
   hideBookPage() {
     this.setState({
       showBookModal: false,
+    });
+  }
+
+  showTestBookPage() {
+    this.setState({
+      showTestBookModal: true,
+    });
+  }
+  hideTestBookPage() {
+    this.setState({
+      showTestBookModal: false,
+    });
+  }
+  // book a test drive
+  bookTestdrive() {
+    console.log('test drive');
+    this.setState({
+      showTestBookModal: false,
+      isBookedTestDrive: true,
+    });
+    let currentTestDriveBooking = [];
+    getData('testDriveBooking', (err, data) => {
+      if (data && data.length > 0) {
+        currentTestDriveBooking = data;
+      }
+      if (currentTestDriveBooking && currentTestDriveBooking.length > 0) {
+        currentTestDriveBooking.push({
+          name: this.props.navigation.state.params.details.name,
+          booked: true,
+        });
+      } else {
+        currentTestDriveBooking = [{
+          name: this.props.navigation.state.params.details.name,
+          booked: true,
+        }];
+      }
+      saveData('testDriveBooking', currentTestDriveBooking);
     });
   }
   bookAbike() {
@@ -186,15 +228,15 @@ export class BikeDetail extends React.Component {
 
             <Card style={[theme.noborder, theme.noshadow, theme.noelevation, styles.detailsCard]}>
               <Grid>
-                <Col style={styles.detailsTextWrapper}>
+                <Col>
                   <Text style={[theme.text_bold, styles.detailsTextWrapper, theme.theme_color]}>{this.props.navigation.state.params.details.totalAvailable}</Text>
                   <Text style={[theme.text_light, styles.detailsTextWrapper]}>available</Text>
                 </Col>
-                <Col style={styles.detailsTextWrapper}>
+                <Col>
                   <Text style={[theme.text_bold, styles.detailsTextWrapper, theme.theme_color]}>{this.props.navigation.state.params.details.kmsFree}</Text>
                   <Text style={[theme.text_light, styles.detailsTextWrapper]}>kms free</Text>
                 </Col>
-                <Col style={styles.detailsTextWrapper}>
+                <Col>
                   <Text style={[theme.text_bold, styles.detailsTextWrapper, theme.theme_color]}>{this.props.navigation.state.params.details.chargesPerKm}<Text style={[theme.text_regular_large, styles.detailsTextWrapper, theme.theme_color]}> ₹</Text></Text>
                   <Text style={[theme.text_light, styles.detailsTextWrapper]}>charges after</Text>
                 </Col>

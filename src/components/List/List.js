@@ -44,6 +44,7 @@ export default class VehicleList extends React.Component {
     deleteData('booking');
     deleteData('features');
     deleteData('initData');
+    deleteData('testDriveBooking');
     Util.reload();
   }
 
@@ -51,7 +52,7 @@ export default class VehicleList extends React.Component {
     const vehicleList = [];
     this.props.listToRender.map((item, index) => {
       vehicleList.push(<TouchableOpacity onPress={() => { this.props.onTap(item); }} key={index}>
-        <Card style={theme.card} key={index}>
+        <Card style={theme.card}>
           <CardItem cardBody style={styles.imageContainer}>
             {this.props.selectedType === 'Bikes' ?
               <Image resizeMode="cover" source={{ uri: item.imgurl }} style={theme.image} />
@@ -69,7 +70,7 @@ export default class VehicleList extends React.Component {
             </Right>
           </CardItem>
         </Card>
-                       </TouchableOpacity>);
+      </TouchableOpacity>);
     });
 
     return (
@@ -101,7 +102,7 @@ export default class VehicleList extends React.Component {
             </Right>
           </CardItem>
         </Card>
-                       </TouchableOpacity>);
+      </TouchableOpacity>);
     });
 
     return (

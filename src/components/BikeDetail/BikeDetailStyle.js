@@ -54,6 +54,11 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 1,
   },
+  footerAndroid:{
+    backgroundColor: '#fff',
+    borderColor: '#ccc',
+    elevation: 50,
+  },
   buttonWrapper: {
     padding: 25,
   },

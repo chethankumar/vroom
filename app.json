@@ -12,8 +12,8 @@
     },
     "splash":{
       "image":"./src/assets/images/vroom2.png",
-      "resizeMode": "contain",
-      "backgroundColor":"#FF5722"
+      "resizeMode": "cover",
+      // "backgroundColor":"#FF5722"
     }
   }
 }
