@@ -34,7 +34,7 @@ export default class BikeReviews extends React.Component {
       reviewList.push(<Card style={[theme.noborder, theme.noshadow, theme.noelevation, styles.reviewsCard]}>
         <CardItem>
           <Left>
-            <Thumbnail source={{ uri: this.props.details.imgurl }} />
+            <Thumbnail source={require('../../assets/images/boy.png')} />
             <Body>
               <Text style={[theme.text_normal]}>{review.reviewer}</Text>
               <View style={{ width: 60, justifyContent: 'space-around' }}>
@@ -56,7 +56,7 @@ export default class BikeReviews extends React.Component {
         <CardItem cardBody>
           <Text style={[theme.text_light]}>{review.comment}</Text>
         </CardItem>
-                      </Card>);
+      </Card>);
     });
     return (
       <View>{reviewList}</View>

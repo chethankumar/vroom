@@ -77,7 +77,8 @@ const styles = StyleSheet.create({
   },
   reviewsCard: {
     padding: 15,
-    borderTopWidth: 0.5,
+    // borderTopWidth: 0.5,
+    backgroundColor: '#fff',
   },
   bookedText: {
     color: '#FF5722',

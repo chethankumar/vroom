@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     height: 100,
     width: '50%',
     alignSelf: 'flex-start',
+    transform: [{ scaleX: -1 }],
   },
   facebookButton: {
     borderRadius: 50,
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   statusBar: {
-    backgroundColor: '#FF5722',
+    backgroundColor: '#FC642D',
     height: Constants.statusBarHeight,
     elevation: 0,
     shadowOffset: { width: 0, height: 0 },
