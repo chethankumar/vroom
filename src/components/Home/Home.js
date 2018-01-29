@@ -21,6 +21,7 @@ import {
   Footer,
   FooterTab,
   StyleProvider,
+  TabHeading,
 } from 'native-base';
 import styles from './style';
 import theme from '../common/theme';
@@ -150,13 +151,34 @@ export class Home extends React.Component {
       <Container style={{ shadowColor: '#fff' }}>
         <View style={styles.statusBar} />
         <Spinner visible={this.state.bikeList.length === 0} />
+        {/* {Platform.OS === 'android' ?
+          <Container>
+          <Header hasTabs style={styles.header}/>
+            <Tabs>
+              <Tab heading={ <TabHeading><Text>Motorbikes</Text></TabHeading>}>
+                <VehicleList
+                    // listToRender={this.state.bikeList}
+                    selectedType="Bikes"
+                    onTap={(details) => { this.showDeatil(details); }}
+                  />
+              </Tab>
+              <Tab heading={ <TabHeading><Text>Scooters</Text></TabHeading>}>
+                <VehicleList
+                    // listToRender={this.state.scooterList}
+                    selectedType="Scooters"
+                    onTap={(details) => { this.showDeatil(details); }}
+                  />
+              </Tab>
+            </Tabs>
+          </Container>
+        :null} */}
         <ScrollView>
           {this.renderSelectedTab()}
         </ScrollView>
         {Platform.OS === 'ios' ?
           <Footer style={styles.footer}>
             <StyleProvider style={getTheme(footerTabTheme)}>
-              <FooterTab tabActiveBgColor="#fff">
+              <FooterTab tabActiveBgColor="#fff" style={styles.footerTab}>
                 <Button
                   style={styles.footerTabBtn}
                   active={this.state.selectedTab === 'bikes'}
@@ -177,7 +199,30 @@ export class Home extends React.Component {
               </FooterTab>
             </StyleProvider>
           </Footer>
-          : null}
+         : 
+         <Footer style={styles.footerAndroid}>
+         <StyleProvider style={getTheme(footerTabTheme)}>
+           <FooterTab tabActiveBgColor="#fff" style={styles.footerTab}>
+             <Button
+               style={styles.footerTabBtn}
+               active={this.state.selectedTab === 'bikes'}
+               onPress={() => this.setState({ selectedTab: 'bikes' })}
+             >
+             <Text style={[theme.text_regular, styles.footerText]}>Motorbikes</Text>
+             {/* <Icon name="ios-bicycle" /> */}
+               {/* <MaterialCommunityIcons name="motorbike" size={32}  /> */}
+             </Button>
+             <Button
+               style={styles.footerTabBtn}
+               active={this.state.selectedTab === 'scooters'}
+               onPress={() => this.setState({ selectedTab: 'scooters' })}
+             >
+             <Text style={[theme.text_regular, styles.footerText]}>Scooters</Text>
+               {/* <Icon name="camera" /> */}
+             </Button>
+           </FooterTab>
+         </StyleProvider>
+       </Footer>} 
       </Container>
     );
   }

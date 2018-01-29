@@ -15,6 +15,7 @@ import {
   Item,
   Label,
   Input,
+  Body,
 } from 'native-base';
 import styles from './LoginStyles';
 import theme from '../common/theme';
@@ -89,12 +90,12 @@ export default class Login extends React.Component {
                 </Button>
               </Form>
             </Content>
-            <Content>
+            {/* <Content>
               <Button full style={[theme.secondary_btn, styles.facebookButton]}>
                 <FontAwesome name="facebook" style={[theme.theme_color, styles.fbIcon]} width="40" height="40" />
                 <Text style={[theme.text_regular, theme.theme_color]}>Continue with Facebook</Text>
               </Button>
-            </Content>
+            </Content> */}
           </LinearGradient>
         </View>
       </Container>

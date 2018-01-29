@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, ScrollView, TouchableOpacity, Animated } from 'react-native';
+import { View, Image, ScrollView, TouchableOpacity, Animated, Platform } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import {
   Container,
@@ -178,6 +178,7 @@ export class BikeDetail extends React.Component {
           </View>
           <BookBike hideBookPage={this.hideBookPage} isShow={this.state.showBookModal} onBook={this.bookAbike} />
         </ParallaxScrollView>
+        {Platform.OS === 'ios' ?
         <Footer style={styles.footer}>
           <Left style={styles.buttonWrapper}>
             <Text style={theme.text_normal}>INR {this.props.navigation.state.params.details.baseTarrif}</Text>
@@ -206,6 +207,34 @@ export class BikeDetail extends React.Component {
             }
           </Right>
         </Footer>
+        : <Footer style={styles.footerAndroid}>
+        <Left style={styles.buttonWrapper}>
+          <Text style={theme.text_normal}>INR {this.props.navigation.state.params.details.baseTarrif}</Text>
+          <StarRating
+            disabled={false}
+            emptyStar="ios-star-outline"
+            fullStar="ios-star"
+            halfStar="ios-star-half"
+            iconSet="Ionicons"
+            maxStars={5}
+            starSize={15}
+            rating={this.props.navigation.state.params.details.ratings}
+            starColor="#FF5722"
+          />
+        </Left>
+        <Right style={styles.buttonWrapper}>
+          {this.state.isBooked ?
+            <Button full style={[theme.secondary_btn]}>
+              <Icon name="ios-checkmark-circle-outline" style={theme.theme_color} />
+              <Text style={[theme.text_normal, styles.bookedText]}>Booked</Text>
+            </Button>
+          :
+            <Button full style={[theme.primary_btn]} onPress={() => { this.showBookPage(); }}>
+              <Text style={theme.text_normal}>Select Time</Text>
+            </Button>
+          }
+        </Right>
+      </Footer>}
       </Container>);
   }
 }
