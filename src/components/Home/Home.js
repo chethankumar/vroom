@@ -27,7 +27,7 @@ import theme from '../common/theme';
 import VehicleList from '../List/List';
 import BikeDetail from '../BikeDetail/BikeDetail';
 import { getAllBikes, getAllScooters } from '../../api/Api';
-import AppLaunchService from '../../assets/applaunch';
+
 
 const defaultProps = {
   list: ['bikes', 'scooters'],
@@ -112,12 +112,6 @@ export class Home extends React.Component {
         });
       }
     });
-    const applaunchService = new AppLaunchService();
-    applaunchService.initialize('us-south', 'ad237ea7-f850-49d2-9f79-d926477dce19', 'f8adac30-ca10-4d72-96dc-afc47936a043', '4d70d456-a84a-4b80-8300-dabbbe99b942', null, { userId: 'chethan', platform: 'iOS' }, {}).then((res) => {
-      console.log(`init ${JSON.stringify(res)}`);
-    }).catch((err) => {
-      console.log(`err ${JSON.stringify(err)}`);
-    });
   }
 
   showDeatil(details) {
@@ -162,8 +156,8 @@ export class Home extends React.Component {
                   active={this.state.selectedTab === 'bikes'}
                   onPress={() => this.setState({ selectedTab: 'bikes' })}
                 >
-                <Text style={[theme.text_regular, styles.footerText]}>Motorbikes</Text>
-                {/* <Icon name="ios-bicycle" /> */}
+                  <Text style={[theme.text_regular, styles.footerText]}>Motorbikes</Text>
+                  {/* <Icon name="ios-bicycle" /> */}
                   {/* <MaterialCommunityIcons name="motorbike" size={32}  /> */}
                 </Button>
                 <Button
@@ -171,7 +165,7 @@ export class Home extends React.Component {
                   active={this.state.selectedTab === 'scooters'}
                   onPress={() => this.setState({ selectedTab: 'scooters' })}
                 >
-                <Text style={[theme.text_regular, styles.footerText]}>Scooters</Text>
+                  <Text style={[theme.text_regular, styles.footerText]}>Scooters</Text>
                   {/* <Icon name="camera" /> */}
                 </Button>
               </FooterTab>
@@ -194,4 +188,3 @@ export default StackNavigator({
   headerMode: 'none',
 });
 
- 

@@ -7,6 +7,7 @@ import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import theme from '../common/theme';
 import styles from './style';
 import { saveData, deleteData } from '../../api/db';
+import { applaunchService } from '../../../App';
 
 const defaultProps = {
   listToRender: [],
@@ -24,9 +25,25 @@ export default class VehicleList extends React.Component {
     this.logout = this.logout.bind(this);
   }
 
+  componentDidMount() {
+    applaunchService.hasFeatureWith('_na7ls6quw', (val) => {
+      if (val) {
+        applaunchService.getValueFor('_na7ls6quw', '_3sajr5825', (err, value) => {
+          if (value) {
+            this.setState({
+              interfaceType: value,
+            });
+          }
+        });
+      }
+    });
+  }
+
   logout() {
     saveData('userId', {});
     deleteData('booking');
+    deleteData('features');
+    deleteData('initData');
     Util.reload();
   }
 
@@ -56,7 +73,7 @@ export default class VehicleList extends React.Component {
     });
 
     return (
-      <List bordered={false} style={styles.container}>
+      <List bordered={false} style={{ backgroundColor: '#fff' }}>
         {vehicleList}
       </List>
     );
@@ -120,7 +137,7 @@ export default class VehicleList extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={{ backgroundColor: '#fff' }}>
         <Content style={styles.contentStyle}>
           <Grid style={styles.spreadContent}>
             <Col>

@@ -1,11 +1,74 @@
 import axios from 'axios';
 import _ from 'lodash';
+import Storage from 'react-native-storage';
+import { AsyncStorage } from 'react-native';
+
+const storage = new Storage({
+  storageBackend: AsyncStorage,
+  defaultExpires: null,
+  enableCache: true,
+});
+
+function saveData(key, value) {
+  storage.save({
+    key,
+    data: value,
+  });
+}
+
+function getData(key, callback) {
+  storage.load({
+    key,
+  }).then((ret) => {
+    console.log(`[DB] value for ${key} is ${JSON.stringify(ret)}`);
+    return callback(null, ret);
+  }).catch((err) => {
+    console.log(`[DB] Error in getting data for ${key}`);
+    return callback(err);
+  });
+}
+
+function deleteData(key) {
+  storage.remove({
+    key,
+  });
+}
+
 
 export default class AppLaunchService {
   constructor() {
     this.url = 'https://applaunch.ng.bluemix.net/applaunch/v1/apps/';
     this.isInitialized = false;
     this.isUserRegistered = false;
+  }
+
+  shouldReinit(region, applicationId, clientSecret, deviceId, config, callback) {
+    getData('initData', (err, data) => {
+      if (data) {
+        delete data.user;
+        delete data.attributes;
+        callback(!_.isEqual(data, {
+          url: this.url,
+          region,
+          applicationId,
+          clientSecret,
+          deviceId,
+          config,
+        }));
+      }
+      callback(true);
+    });
+  }
+
+  shouldUpdateUser(region, applicationId, clientSecret, deviceId, config, user, attributes, callback) {
+    getData('initData', (err, data) => {
+      if (data) {
+        if (_.isEqual(data.user, user) && _.isEqual(data.attributes, attributes)) {
+          callback(false);
+        }
+        callback(true);
+      }
+    });
   }
 
   initialize(region, applicationId, clientSecret, deviceId, config, user, attributes) {
@@ -29,71 +92,144 @@ export default class AppLaunchService {
     }
 
     const promise = new Promise(((resolve, reject) => {
-      axios.post(`${baseurl}devices`, deviceData, {
-        headers: {
-          clientSecret: this.clientsecret,
-          'Content-Type': 'application/json',
-        },
-      }).then((RegistrationRes) => {
-        this.isUserRegistered = true;
-        // this.result = this.userId;
-        this.isInitialized = true;
-        // format is users + userID + actions
-        let actionsRegUrl = `${baseurl}devices`;
-        actionsRegUrl += '/';
-        actionsRegUrl += this.deviceId;
-        actionsRegUrl += '/actions';
-        // Get with clientsecret and content-type
-        // Get with clientsecret and content-type
-        axios.get(actionsRegUrl, {
-          headers: {
-            clientSecret: this.clientsecret,
-            'Content-Type': 'application/json',
-          },
-        }).then((res) => {
-          const result = JSON.stringify(res.data);
-          this.features = result.features;
-          resolve(result);
-        }, (err) => {
-          console.log(`ALlib: Error - ${err.statusText}`);
-          reject(err.status);
-        });
-      }, (RegistrationErr) => {
-        this.isUserRegistered = false;
-        console.log(`ALlib: Error - ${RegistrationErr.statusText}`);
-        reject(RegistrationErr.status);
+      this.shouldReinit(region, applicationId, clientSecret, deviceId, config, (val) => {
+        if (val) {
+          axios.post(`${baseurl}devices`, deviceData, {
+            headers: {
+              clientSecret: this.clientsecret,
+              'Content-Type': 'application/json',
+            },
+          }).then((RegistrationRes) => {
+            saveData('initData', {
+              url: this.url,
+              region,
+              applicationId,
+              clientSecret,
+              deviceId,
+              config,
+              user,
+              attributes,
+            });
+            this.isUserRegistered = true;
+            // this.result = this.userId;
+            this.isInitialized = true;
+            // format is users + userID + actions
+            let actionsRegUrl = `${baseurl}devices`;
+            actionsRegUrl += '/';
+            actionsRegUrl += this.deviceId;
+            actionsRegUrl += '/actions';
+            // Get with clientsecret and content-type
+            // Get with clientsecret and content-type
+            axios.get(actionsRegUrl, {
+              headers: {
+                clientSecret: this.clientsecret,
+                'Content-Type': 'application/json',
+              },
+            }).then((res) => {
+              const result = res.data;
+              this.features = result.features;
+              saveData('features', result.features);
+              resolve(result);
+            }, (err) => {
+              console.log(`ALlib: Error - ${err.statusText}`);
+              reject(err.status);
+            });
+          }, (RegistrationErr) => {
+            this.isUserRegistered = false;
+            console.log(`ALlib: Error - ${RegistrationErr.statusText}`);
+            reject(RegistrationErr.status);
+          });
+        }
+      });
+      this.shouldUpdateUser(region, applicationId, clientSecret, deviceId, config, user, attributes, (val) => {
+        if (val) {
+          axios.put(`${baseurl}devices/${deviceData.deviceId}`, deviceData, {
+            headers: {
+              clientSecret: this.clientsecret,
+              'Content-Type': 'application/json',
+            },
+          }).then((RegistrationRes) => {
+            saveData('initData', {
+              url: this.url,
+              region,
+              applicationId,
+              clientSecret,
+              deviceId,
+              config,
+              user,
+              attributes,
+            });
+            this.isUserRegistered = true;
+            // this.result = this.userId;
+            this.isInitialized = true;
+            // format is users + userID + actions
+            let actionsRegUrl = `${baseurl}devices`;
+            actionsRegUrl += '/';
+            actionsRegUrl += this.deviceId;
+            actionsRegUrl += '/actions';
+            // Get with clientsecret and content-type
+            // Get with clientsecret and content-type
+            axios.get(actionsRegUrl, {
+              headers: {
+                clientSecret: this.clientsecret,
+                'Content-Type': 'application/json',
+              },
+            }).then((res) => {
+              const result = res.data;
+              this.features = result.features;
+              saveData('features', result.features);
+              resolve(result);
+            }, (err) => {
+              console.log(`ALlib: Error - ${err.statusText}`);
+              reject(err.status);
+            });
+          }, (RegistrationErr) => {
+            this.isUserRegistered = false;
+            console.log(`ALlib: Error - ${RegistrationErr.statusText}`);
+            reject(RegistrationErr.status);
+          });
+        }
       });
     }));
     return promise;
   }
 
-  hasFeatureWith(code) {
+  hasFeatureWith(code, callback) {
     console.log('ALlib: hasFeatureWith');
     let hasFeature = false;
-    for (let i = 0; i < this.features.length; i += 1) {
-      if (code === this.features[i].code) {
-        hasFeature = true;
-        break;
-      }
-    }
-    return hasFeature;
-  }
-
-  getValueFor(featureWithCode, propertyWithCode) {
-    console.log('ALlib: getValueFor');
-    let val = '';
-    for (let i = 0; i < this.features.length; i += 1) {
-      if (featureWithCode === this.features[i].code) {
-        const properties = this.features[i].properties;
-        for (let j = 0; j < properties.length; j += 1) {
-          if (propertyWithCode === properties[j].code) {
-            val = properties[j].value;
+    getData('features', (err, features) => {
+      if (features) {
+        for (let i = 0; i < features.length; i += 1) {
+          if (code === features[i].code) {
+            hasFeature = true;
             break;
           }
         }
       }
-    }
-    return val;
+      return callback(hasFeature);
+    });
+  }
+
+  getValueFor(featureWithCode, propertyWithCode, callback) {
+    console.log('ALlib: getValueFor');
+    let val = '';
+    getData('features', (err, features) => {
+      if (features) {
+        for (let i = 0; i < features.length; i += 1) {
+          if (featureWithCode === features[i].code) {
+            const properties = features[i].properties;
+            for (let j = 0; j < properties.length; j += 1) {
+              if (propertyWithCode === properties[j].code) {
+                val = properties[j].value;
+                break;
+              }
+            }
+          }
+        }
+        return callback(null, val);
+      }
+      return callback(err);
+    });
   }
 
   sendMetricsWith(code) {

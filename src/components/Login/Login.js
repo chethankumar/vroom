@@ -3,6 +3,7 @@ import { View, ScrollView, Platform, Image } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { FontAwesome } from '@expo/vector-icons';
 import Spinner from 'react-native-loading-spinner-overlay';
+import { v1 } from 'uuid';
 import { Constants, LinearGradient } from 'expo';
 import {
   Container,
@@ -20,6 +21,7 @@ import styles from './LoginStyles';
 import theme from '../common/theme';
 import { getData, saveData } from '../../api/db';
 import Home from '../Home/Home';
+import { applaunchService } from '../../../App';
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -46,6 +48,17 @@ export default class Login extends React.Component {
     saveData('userId', { name: this.state.userName });
     this.setState({
       userSaved: true,
+    });
+
+    let betaTester = false;
+    if (this.state.userName === 'Chethan') {
+      betaTester = true;
+    }
+    // 4d70d446-a84a-4b80-8300-dabbbe99b942
+    applaunchService.initialize('us-south', 'ad237ea7-f850-49d2-9f79-d926477dce19', 'f8adac30-ca10-4d72-96dc-afc47936a043', v1(), null, { userId: this.state.userName, platform: 'iOS' }, { 'beta tester': betaTester }).then((res) => {
+      console.log(`init ${JSON.stringify(res)}`);
+    }).catch((err) => {
+      console.log(`err ${JSON.stringify(err)}`);
     });
   }
 
