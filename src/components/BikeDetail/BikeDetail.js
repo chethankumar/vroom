@@ -33,6 +33,7 @@ export class BikeDetail extends React.Component {
 
     this.state = {
       showBookModal: false,
+      showTestBookModal: false,
       isBooked: false,
       showStatusBar: false,
     };
@@ -41,9 +42,13 @@ export class BikeDetail extends React.Component {
     this.hideBookPage = this.hideBookPage.bind(this);
     this.bookAbike = this.bookAbike.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
+    this.showTestBookPage = this.showTestBookPage.bind(this);
+    this.hideTestBookPage = this.hideTestBookPage.bind(this);
+    this.bookTestdrive = this.bookTestdrive.bind(this);
   }
 
   componentDidMount = () => {
+    // check for bookings
     getData('booking', (err, data) => {
       if (data && data.length > 0) {
         data.map((item) => {
@@ -55,6 +60,19 @@ export class BikeDetail extends React.Component {
         });
       }
     });
+    //check for test drive bookings
+    getData('testDriveBooking', (err, data) => {
+      if (data && data.length > 0) {
+        data.map((item) => {
+          if (item.name === this.props.navigation.state.params.details.name) {
+            this.setState({
+              isBookedTestDrive: true,
+            });
+          }
+        });
+      }
+    });
+
   }
 
 
@@ -80,6 +98,43 @@ export class BikeDetail extends React.Component {
   hideBookPage() {
     this.setState({
       showBookModal: false,
+    });
+  }
+
+  showTestBookPage() {
+    this.setState({
+      showTestBookModal: true,
+    });
+  }
+  hideTestBookPage() {
+    this.setState({
+      showTestBookModal: false,
+    });
+  }
+  // book a test drive
+  bookTestdrive() {
+    console.log('test drive');
+    this.setState({
+      showTestBookModal: false,
+      isBookedTestDrive: true,
+    });
+    let currentTestDriveBooking = [];
+    getData('testDriveBooking', (err, data) => {
+      if (data && data.length > 0) {
+        currentTestDriveBooking = data;
+      }
+      if (currentTestDriveBooking && currentTestDriveBooking.length > 0) {
+        currentTestDriveBooking.push({
+          name: this.props.navigation.state.params.details.name,
+          booked: true,
+        });
+      } else {
+        currentTestDriveBooking = [{
+          name: this.props.navigation.state.params.details.name,
+          booked: true,
+        }];
+      }
+      saveData('testDriveBooking', currentTestDriveBooking);
     });
   }
   bookAbike() {
@@ -146,21 +201,28 @@ export class BikeDetail extends React.Component {
               <Text style={styles.text_normal} />
             </View>
             <View style={styles.testDriveWrapper}>
-              <Button full style={[theme.primary_btn, styles.testDriveBtn]}>
-                <Text style={[theme.text_normal, theme.invert_color]}>Book Test Drive</Text>
-              </Button>
+              {this.state.isBookedTestDrive ?
+                <Button full style={[theme.secondary_btn]}>
+                  <Icon name="ios-checkmark-circle-outline" style={theme.theme_color} />
+                  <Text style={[theme.text_normal, styles.bookedText]}>Booked</Text>
+                </Button>
+              :
+                <Button full style={[theme.primary_btn, styles.testDriveBtn]} onPress={this.showTestBookPage}>
+                  <Text style={[theme.text_normal, theme.invert_color]}>Book Test Drive</Text>
+                </Button>
+              }
             </View>
             <Card style={[theme.noborder, theme.noshadow, theme.noelevation, styles.detailsCard]}>
               <Grid>
-                <Col style={styles.detailsTextWrapper}>
+                <Col>
                   <Text style={[theme.text_bold, styles.detailsTextWrapper, theme.theme_color]}>{this.props.navigation.state.params.details.totalAvailable}</Text>
                   <Text style={[theme.text_light, styles.detailsTextWrapper]}>available</Text>
                 </Col>
-                <Col style={styles.detailsTextWrapper}>
+                <Col>
                   <Text style={[theme.text_bold, styles.detailsTextWrapper, theme.theme_color]}>{this.props.navigation.state.params.details.kmsFree}</Text>
                   <Text style={[theme.text_light, styles.detailsTextWrapper]}>kms free</Text>
                 </Col>
-                <Col style={styles.detailsTextWrapper}>
+                <Col>
                   <Text style={[theme.text_bold, styles.detailsTextWrapper, theme.theme_color]}>{this.props.navigation.state.params.details.chargesPerKm}<Text style={[theme.text_regular_large, styles.detailsTextWrapper, theme.theme_color]}> ₹</Text></Text>
                   <Text style={[theme.text_light, styles.detailsTextWrapper]}>charges after</Text>
                 </Col>
@@ -177,10 +239,11 @@ export class BikeDetail extends React.Component {
             />
           </View>
           <BookBike hideBookPage={this.hideBookPage} isShow={this.state.showBookModal} onBook={this.bookAbike} />
+          <BookBike hideBookPage={this.hideTestBookPage} isShow={this.state.showTestBookModal} onBook={this.bookTestdrive} />
         </ParallaxScrollView>
         {Platform.OS === 'ios' ?
-        <Footer style={styles.footer}>
-          <Left style={styles.buttonWrapper}>
+          <Footer style={styles.footer}>
+            <Left style={styles.buttonWrapper}>
             <Text style={theme.text_normal}>INR {this.props.navigation.state.params.details.baseTarrif}</Text>
             <StarRating
               disabled={false}
@@ -194,7 +257,7 @@ export class BikeDetail extends React.Component {
               starColor="#FF5722"
             />
           </Left>
-          <Right style={styles.buttonWrapper}>
+            <Right style={styles.buttonWrapper}>
             {this.state.isBooked ?
               <Button full style={[theme.secondary_btn]}>
                 <Icon name="ios-checkmark-circle-outline" style={theme.theme_color} />
@@ -206,11 +269,11 @@ export class BikeDetail extends React.Component {
               </Button>
             }
           </Right>
-        </Footer>
+          </Footer>
         : <Footer style={styles.footerAndroid}>
-        <Left style={styles.buttonWrapper}>
-          <Text style={theme.text_normal}>INR {this.props.navigation.state.params.details.baseTarrif}</Text>
-          <StarRating
+          <Left style={styles.buttonWrapper}>
+            <Text style={theme.text_normal}>INR {this.props.navigation.state.params.details.baseTarrif}</Text>
+            <StarRating
             disabled={false}
             emptyStar="ios-star-outline"
             fullStar="ios-star"
@@ -221,9 +284,9 @@ export class BikeDetail extends React.Component {
             rating={this.props.navigation.state.params.details.ratings}
             starColor="#FF5722"
           />
-        </Left>
-        <Right style={styles.buttonWrapper}>
-          {this.state.isBooked ?
+          </Left>
+          <Right style={styles.buttonWrapper}>
+            {this.state.isBooked ?
             <Button full style={[theme.secondary_btn]}>
               <Icon name="ios-checkmark-circle-outline" style={theme.theme_color} />
               <Text style={[theme.text_normal, styles.bookedText]}>Booked</Text>
@@ -233,8 +296,8 @@ export class BikeDetail extends React.Component {
               <Text style={theme.text_normal}>Select Time</Text>
             </Button>
           }
-        </Right>
-      </Footer>}
+          </Right>
+        </Footer>}
       </Container>);
   }
 }
