@@ -26,6 +26,7 @@ import styles from './BikeDetailStyle';
 import StarRating from 'react-native-star-rating';
 import BikeReviews from './BikeReviews';
 import BookBike from './Bookbike';
+import { applaunchService } from '../../../App';
 
 export class BikeDetail extends React.Component {
   constructor(props) {
@@ -36,6 +37,11 @@ export class BikeDetail extends React.Component {
       showTestBookModal: false,
       isBooked: false,
       showStatusBar: false,
+      bookingPosition: 'sticky',
+      hasTestDriveFeature: false,
+      testDriveButtonText: 'Book',
+      testDriveButtonColor: '#FF5722',
+      testDriveButtonCornerRadius: 50,
     };
 
     this.showBookPage = this.showBookPage.bind(this);
@@ -60,19 +66,27 @@ export class BikeDetail extends React.Component {
         });
       }
     });
-    //check for test drive bookings
-    getData('testDriveBooking', (err, data) => {
-      if (data && data.length > 0) {
-        data.map((item) => {
-          if (item.name === this.props.navigation.state.params.details.name) {
-            this.setState({
-              isBookedTestDrive: true,
-            });
+
+    applaunchService.hasFeatureWith('_tr40xzif0', (val) => {
+      if (val) {
+        this.setState({ hasTestDriveFeature: true });
+        applaunchService.getValueFor('_tr40xzif0', '_hxrp9jh49', (err, text) => {
+          if (text) {
+            this.setState({ testDriveButtonText: text });
           }
         });
       }
     });
 
+    applaunchService.hasFeatureWith('_f4dn5s8pu', (val) => {
+      if (val) {
+        applaunchService.getValueFor('_f4dn5s8pu', '_bllfx2mda', (err, text) => {
+          if (text) {
+            this.setState({ bookingPosition: text });
+          }
+        });
+      }
+    });
   }
 
 
@@ -164,6 +178,7 @@ export class BikeDetail extends React.Component {
 
     // booking: [{name: asdf, booked: '11/12'}]
   }
+
   render() {
     return (
       <Container>
@@ -200,18 +215,17 @@ export class BikeDetail extends React.Component {
               </Text>
               <Text style={styles.text_normal} />
             </View>
-            <View style={styles.testDriveWrapper}>
-              {this.state.isBookedTestDrive ?
-                <Button full style={[theme.secondary_btn]}>
-                  <Icon name="ios-checkmark-circle-outline" style={theme.theme_color} />
-                  <Text style={[theme.text_normal, styles.bookedText]}>Booked</Text>
+
+            {this.state.hasTestDriveFeature ?
+              <View style={styles.testDriveWrapper}>
+                <Button full style={{ backgroundColor: this.state.testDriveButtonColor, borderColor: this.state.testDriveButtonColor, borderRadius: this.state.testDriveButtonCornerRadius }}>
+                  <Text style={[theme.text_normal, theme.invert_color]}>
+                    {this.state.testDriveButtonText}
+                  </Text>
                 </Button>
-              :
-                <Button full style={[theme.primary_btn, styles.testDriveBtn]} onPress={this.showTestBookPage}>
-                  <Text style={[theme.text_normal, theme.invert_color]}>Book Test Drive</Text>
-                </Button>
-              }
-            </View>
+              </View>
+          : null}
+
             <Card style={[theme.noborder, theme.noshadow, theme.noelevation, styles.detailsCard]}>
               <Grid>
                 <Col>
@@ -239,65 +253,69 @@ export class BikeDetail extends React.Component {
             />
           </View>
           <BookBike hideBookPage={this.hideBookPage} isShow={this.state.showBookModal} onBook={this.bookAbike} />
-          <BookBike hideBookPage={this.hideTestBookPage} isShow={this.state.showTestBookModal} onBook={this.bookTestdrive} />
+
+          {this.state.bookingPosition === 'sticky' ?
+          null :
+          <View>
+            <Left style={styles.buttonWrapper}>
+              <Text style={theme.text_normal}>INR {this.props.navigation.state.params.details.baseTarrif}</Text>
+              <StarRating
+                disabled={false}
+                emptyStar="ios-star-outline"
+                fullStar="ios-star"
+                halfStar="ios-star-half"
+                iconSet="Ionicons"
+                maxStars={5}
+                starSize={15}
+                rating={this.props.navigation.state.params.details.ratings}
+                starColor="#FF5722"
+              />
+            </Left>
+            <Right style={styles.buttonWrapper}>
+              {this.state.isBooked ?
+                <Button full style={[theme.secondary_btn]}>
+                  <Icon name="ios-checkmark-circle-outline" style={theme.theme_color} />
+                  <Text style={[theme.text_normal, styles.bookedText]}>Booked</Text>
+                </Button>
+            :
+                <Button full style={[theme.primary_btn]} onPress={() => { this.showBookPage(); }}>
+                  <Text style={theme.text_normal}>Select Time</Text>
+                </Button>
+            }
+            </Right>
+          </View>
+            }
         </ParallaxScrollView>
-        {Platform.OS === 'ios' ?
+        {this.state.bookingPosition === 'sticky' ?
           <Footer style={styles.footer}>
             <Left style={styles.buttonWrapper}>
-            <Text style={theme.text_normal}>INR {this.props.navigation.state.params.details.baseTarrif}</Text>
-            <StarRating
-              disabled={false}
-              emptyStar="ios-star-outline"
-              fullStar="ios-star"
-              halfStar="ios-star-half"
-              iconSet="Ionicons"
-              maxStars={5}
-              starSize={15}
-              rating={this.props.navigation.state.params.details.ratings}
-              starColor="#FF5722"
-            />
-          </Left>
+              <Text style={theme.text_normal}>INR {this.props.navigation.state.params.details.baseTarrif}</Text>
+              <StarRating
+                disabled={false}
+                emptyStar="ios-star-outline"
+                fullStar="ios-star"
+                halfStar="ios-star-half"
+                iconSet="Ionicons"
+                maxStars={5}
+                starSize={15}
+                rating={this.props.navigation.state.params.details.ratings}
+                starColor="#FF5722"
+              />
+            </Left>
             <Right style={styles.buttonWrapper}>
-            {this.state.isBooked ?
-              <Button full style={[theme.secondary_btn]}>
-                <Icon name="ios-checkmark-circle-outline" style={theme.theme_color} />
-                <Text style={[theme.text_normal, styles.bookedText]}>Booked</Text>
-              </Button>
+              {this.state.isBooked ?
+                <Button full style={[theme.secondary_btn]}>
+                  <Icon name="ios-checkmark-circle-outline" style={theme.theme_color} />
+                  <Text style={[theme.text_normal, styles.bookedText]}>Booked</Text>
+                </Button>
             :
-              <Button full style={[theme.primary_btn]} onPress={() => { this.showBookPage(); }}>
-                <Text style={theme.text_normal}>Select Time</Text>
-              </Button>
+                <Button full style={[theme.primary_btn]} onPress={() => { this.showBookPage(); }}>
+                  <Text style={theme.text_normal}>Select Time</Text>
+                </Button>
             }
-          </Right>
+            </Right>
           </Footer>
-        : <Footer style={styles.footerAndroid}>
-          <Left style={styles.buttonWrapper}>
-            <Text style={theme.text_normal}>INR {this.props.navigation.state.params.details.baseTarrif}</Text>
-            <StarRating
-            disabled={false}
-            emptyStar="ios-star-outline"
-            fullStar="ios-star"
-            halfStar="ios-star-half"
-            iconSet="Ionicons"
-            maxStars={5}
-            starSize={15}
-            rating={this.props.navigation.state.params.details.ratings}
-            starColor="#FF5722"
-          />
-          </Left>
-          <Right style={styles.buttonWrapper}>
-            {this.state.isBooked ?
-            <Button full style={[theme.secondary_btn]}>
-              <Icon name="ios-checkmark-circle-outline" style={theme.theme_color} />
-              <Text style={[theme.text_normal, styles.bookedText]}>Booked</Text>
-            </Button>
-          :
-            <Button full style={[theme.primary_btn]} onPress={() => { this.showBookPage(); }}>
-              <Text style={theme.text_normal}>Select Time</Text>
-            </Button>
-          }
-          </Right>
-        </Footer>}
+        : null}
       </Container>);
   }
 }

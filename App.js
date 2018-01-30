@@ -4,6 +4,9 @@ import { Font } from 'expo';
 import Home from './src/components/Home/Home';
 import Login from './src/components/Login/Login';
 import { getData } from './src/api/db';
+import AppLaunchService from './src/assets/applaunch';
+
+export const applaunchService = new AppLaunchService();
 
 export default class App extends React.Component {
   constructor(props) {
