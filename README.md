@@ -2,7 +2,7 @@
 
 ## Overview
 Vroom is a local bike/scooter rental app that lets you book your two wheeler on availabilty and lets you choose the desired time based on the availablity. This app uses the IBM App Launch Service that helps you control your application features. It demoes the following feaure of App Launch Service :
-- Remote App Customisation.[Link to a header](#Concept 1 - Remote App Customisation)
+- Remote App Customisation.[Go Here](#Concept-4---App-Customisation-by-audiences)
 - Remote Feature Toggle.
 - App Customisation by audiences
 
@@ -53,7 +53,8 @@ componentDidMount() {
  The app can now be coded to utilize these Feature parameters to set the view for the bikes/scooters list as list view. That's it - the app will load the Feature paramteres during app initialization. If the property is updated to grid again, it will update the app during the next app initialization.
 
  
-### Concept 2 - Remote Feature Toggle
+<!-- ### Concept 2 - Remote Feature Toggle -->
+### Gists
 This is one of the most often asked feature and the easiest to accomplish using the App Launch Service. 
 
 Let's say we would like to introduce a new feature for booking the test drives for the vehicles available.
