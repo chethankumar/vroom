@@ -1,48 +1,96 @@
-# Vroom App 
+# Vroom - Bike Rental App - App Launch Concepts and Examples
 
 ## Overview
 Vroom is a local bike/scooter rental app that lets you book your two wheeler on availabilty and lets you choose the desired time based on the availablity. This app uses the IBM App Launch Service that helps you control your application features. It demoes the following feaure of App Launch Service :
-- A Test drive Engagement which lets you enable the test drive feature in your app.
-- A Theme Change Engagement which lets you change the theme of your app for a selected audience.
+- Remote App Customisation.
+- Remote Feature Toggle.
+- App Customisation by audiences
+
 
 
 ### Concept 1 - Remote App Customisation
-A most common use case is where an app developer would want to change app background, a button text or certain widget placement in the app once after the app is published to the Appstore. Another Appstore publish might be an overkill, hence developers would prefer an over-the-air update. This gives developers a much-needed flexibility to manipulate app behavior.
-
-Let's say you would like a button that pop's up a Poll question with yes-no buttons. In the App Launch service Console you will configure this app attributes and later in your app, you will use the SDK APIs.
+A most common use case is where an app developer would want to change app theme, a button text or certain widget placement in the app once after the app is published to the Appstore. Another Appstore publish might be an overkill, hence developers would prefer an over-the-air update. This gives developers a much-needed flexibility to manipulate app behavior.
+Let's say we would like to change the app layout from grid to a list. The App Launch Service lets you do this in a series of simple steps where you can define your set of audience and the feature(sticky button) and just roll it out!
 
  - **Feature** - A feature is equivalent to a Java class where you define class members. 
-	 - Let's call this feature - **AskPoll**
+	 - Let's call this feature - **List View Feature**
 	 - Define properties in this feature
-		 - property 1 - popUpText
-		 - property 2 - popUpYes
-		 - property 3 - popUpNo
- - **Audience** - An audience is a collection of attributes that define the characteristics of an audience segment. Let's say you'd like to group all 'Gold' customers, then you will define an Audience, called GoldCustomers with an attribute in it, called GoldAudienceSegment with a value set to 'Gold'. Later during the app development you will initialize your app by setting an attribute with {'GoldAudienceSegment':'Gold'}. This initialization will cluster that app (the device) into a 'Gold' audience. 
-	 - Let's define an audience called, **PopUpSegment** 
-	 - Set its value to 'AllPopupUsers'
- - **Engagement** - An engagement is an instantiation of a Feature with properties initialized and attaching one of the pre-defined audiences. For our AskPoll feature, we will,
-	 - Create an Engagement, called - **AskPollEngagement**
-		 - Initialize AskPoll feature with,
-			 - popUpText = "Feeling good?"
-			 - popUpYes = "Absolutely"
-			 - popUpNo = "Nah"
+		 - property  - layoutType(default value - 'list').
+ - **Audience** - An audience is a collection of attributes that define the characteristics of an audience segment. Let's say you'd like to target to all users, then you will define an Audience, called allUsers with 'platforms' attribute with 'ios' and 'android' selected.
+	 - Let's define an audience called, **List View Users** 
+ - **Engagement** - An engagement is an instantiation of a Feature with properties initialized and attaching one of the pre-defined audiences. For our List View feature, we will,
+	 - Create an Engagement, called - **List View Engagement**
+		 - Select the List View Feature with the below properties:
+			 - layoutType = "list"
 		 - Initialize Audience,
-			 - Audience="PopUpSegment"
+			 - Audience="List View Users"
 
-Once the above is defined in the Console, in your code you will initialize the service and call the registration API passing in,
+Once the above is defined in the Console, in your code you will initialize the service and call the registration API
  ```
- {"PopUpSegment":"AllPopupUsers"}
+ applaunchService.initialize('us-south', 'ad237ea7-f850-49d2-9f79-d926477dce19', 'f8adac30-ca10-4d72-96dc-afc47936a043', deviceId, null, { userId: this.state.userName, platform: Platform.OS }, null).then((res) => {
+      console.log(`init ${JSON.stringify(res)}`);
+    }).catch((err) => {
+      console.log(`err ${JSON.stringify(err)}`);
  ```
- The app can now be coded to utilize these Feature parameters to set the Poll question and the two button's label. That's it - the app will load the Feature parameters during app initialization. If the text is updated then the updated is text is fetched during the next app initialization.
+After the initialization, configure the appLaunch service in your component like this :
+```
+componentDidMount() {
+    applaunchService.hasFeatureWith('_na7ls6quw', (val) => {
+      if (val) {
+        applaunchService.getValueFor('_na7ls6quw', '_3sajr5825', (err, value) => {
+          if (value) {
+            this.setState({
+              interfaceType: value,
+            });
+          }
+        });
+      }
+    });
+  }
+  ```
+  **Note** - The interfaceType here refers to list or grid view.
+
+ The app can now be coded to utilize these Feature parameters to set the view for the bikes/scooters list as list view. That's it - the app will load the Feature paramteres during app initialization. If the property is updated to grid again, it will update the app during the next app initialization.
+
  
 ### Concept 2 - Remote Feature Toggle
 This is one of the most often asked feature and the easiest to accomplish using the App Launch Service. 
+
+Let's say we would like to introduce a new feature for booking the test drives for the vehicles available.
  
- - **Feature** - No change
- - **Audience** - No change
- - **Engagement** - In the App Launch Service Console if the engagement, "AskPollEngagement" is paused then the logic to check for the feature fails and the button, Take Poll will never be displayed. Resume it, then the button is displayed.
+ - **Feature** - Let's call this feature - **Test Drive Feature**
+	 - Define properties in this feature
+		 - buttonText  - 'Book a test drive'.
+		 - buttonColor - '#FF5722'.
+ - **Audience** - No change.
+ - **Engagement** -. For our Test Drive feature, we will,
+	 - Create an Engagement, called - **Test Drive Engagement**
+		 - Select the Test Drive Feature with the below properties, you can also override these properties in your engagement:
+			- buttonText  - 'Book a test drive'.		 	- buttonColor - '#FF5722'.
+		 - Initialize Audience,
+			 - Audience= No change
+
+Once the above is defined in the Console, in your code confiure the App Launch service as below:
+
+```
+ applaunchService.hasFeatureWith('_tr40xzif0', (val) => {
+      if (val) {
+        this.setState({ hasTestDriveFeature: true });
+        applaunchService.getValueFor('_tr40xzif0', '_hxrp9jh49', (err, buttonText) => {
+          if (text) {
+            this.setState({ testDriveButtonText: buttonText });
+          }
+        });
+		applaunchService.getValueFor('_tr40xzif0', '_hxrp9jh50', (err, buttonColor) => {
+          if (text) {
+            this.setState({ testDriveButtonColor: buttonColor });
+          }
+        });
+      }
+    });
+```
  
-In your code surround the app logic to check if a feature is defined. For example, to display the 'Take Poll' button surround the display logic with a check for the feature, called 'AskPoll'.
+That's it - Now when your app reinitializes, it will show the 'Book a test drive' button with the color as '#FF5722' to the audience you have targeted. 
 
 
 ### Concept 3 - Vary App Customisation by percentage of Users
@@ -63,35 +111,70 @@ Often Developers would want to create multiple variants of Feature properties an
  - Code - No change in the code since the App Launch Service handles the audience segmentation.
 
 ### Concept 4 - App Customisation by audiences
-This is perhaps the most advanced and the most powerful feature that App Launch Service supports. Take Poll feature, for example, if you would like to create two audiences, Android users and iOS users and tailor app customisation for each audience then user experience can be customised for different devices.
+This is perhaps the most advanced and the most powerful feature that App Launch Service supports.
+Take Book Test Drive Feature, for example, if you would like to create two audiences, Android users and iOS users and tailor app customisation for each audience then user experience can be customised for different devices.
 
- - **Feature** - No change
- - **Audience** - Earlier we had a single audience, called PopUpSegment. We will change this to include two separate audiences, AndroidPopupSegment and iOSPopupSegment.
-	 - 	Let's define an audience called, **AndroidPopupSegment** 
-	 - Set its value to 'AllPopupUsers'
-	 - 	Let's define another audience called, **iOSPopupSegment** 
-	 - Set its value to 'AllPopupUsers'
- - Engagement - As defined in Concept 1 an engagement instantiates a feature by setting values. In this case, we will define two engagements.
-	 - Create an Engagement, called - **AndroidAskPollEngagement**
-		 - Initialize AskPoll feature with,
-			 - popUpText = "How are you feeling today?"
-			 - popUpYes = "Absolutely"
-			 - popUpNo = "Nah"
+ - **Feature** - Same as concept 2.
+ - **Audience** - Let's say you'd like to target to only beta users, then you will define an Audience, called **Beta Users** with a new boolean attribute 'betaUserAttribute'.
+	 - Let's define an audience called, **Beta Users** 
+	 - Select the 'betaUserAttribute' and set its value to true.
+ - **Engagement** - As defined in Concept 1 an engagement instantiates a feature by setting values. In this case, we will create a new engagement to target the new audience.
+	 - Create an Engagement, called - **BetaUsersTestDrive**
+		 - Select the Test Drive Feature with the below properties, you can also override these properties in your engagement:
+			- buttonText  - 'Book a test drive'.
+			- buttonColor - '#FF5722'
 		 - Initialize Audience,
-			 - Audience="**AndroidPopupSegment**"
-	 - Create a second engagement, called **iOSAskPollEngagement**
-		 - Initialize AskPoll feature with,
-			 - popUpText = "Feeling good today?"
-			 - popUpYes = "Yes"
-			 - popUpNo = "No"
-		 - Initialize Audience,
-			 - Audience="**iOSPopupSegment**"
-Note - you may create variants within each engagement, for example, within AndroidAskPollEngagement you may apply **Concept 3**.
+			 - Audience="**Beta Users**"
+
+**Note** - As your target audience has changed, you will need to reinitalize the App launch service to target the new set of audience i.e beta users.
+
+Once the above is defined in the Console, in your code you will initialize the service and call the registration API
+```
+ let betaTester = false;
+    if (this.state.userName === 'Chethan') {
+      betaTester = true;
+    }
+
+applaunchService.initialize('us-south', 'ad237ea7-f850-49d2-9f79-d926477dce19', 'f8adac30-ca10-4d72-96dc-afc47936a043', deviceId, null, { userId: this.state.userName, platform: Platform.OS }, { 'beta users': betaTester }).then((res) => {
+      console.log(`init ${JSON.stringify(res)}`);
+    }).catch((err) => {
+      console.log(`err ${JSON.stringify(err)}`);
+    });
+  }
+  ```
+
+  Let's configure the component with to set the feature properties the same way as we did in concept 2.
+
+```
+ applaunchService.hasFeatureWith('_tr40xzif0', (val) => {
+      if (val) {
+        this.setState({ hasTestDriveFeature: true });
+        applaunchService.getValueFor('_tr40xzif0', '_hxrp9jh49', (err, buttonText) => {
+          if (text) {
+            this.setState({ testDriveButtonText: buttonText });
+          }
+        });
+      }
+    });
+
+    applaunchService.hasFeatureWith('_f4dn5s8pu', (val) => {
+      if (val) {
+        applaunchService.getValueFor('_f4dn5s8pu', '_bllfx2mda', (err, buttonColor) => {
+          if (text) {
+            this.setState({ bookingPosition: buttonColor });
+          }
+        });
+      }
+    });
+  }
+
+
+  ```
+
+That's it - Now when your app reinitializes, it will show the 'Book a test drive' button with the color as '#FF5722' only to the Beta Users of your app. 
 
 ### Metrics
 A hidden gem inside App Launch Service is collecting metrics. App Launch Service allows extensive support to embed metric collection hooks, across all the above four concepts. These metrics will help you evaluate results of A/B testing, Feature performance, etc.
-
-Next step, read App Launch documentation here and try out one of the samples here.
 
 ## License
 

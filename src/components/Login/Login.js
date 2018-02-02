@@ -55,8 +55,9 @@ export default class Login extends React.Component {
     if (this.state.userName === 'Chethan') {
       betaTester = true;
     }
+    const deviceId = v1();
     // 4d70d446-a84a-4b80-8300-dabbbe99b942
-    applaunchService.initialize('us-south', 'ad237ea7-f850-49d2-9f79-d926477dce19', 'f8adac30-ca10-4d72-96dc-afc47936a043', v1(), null, { userId: this.state.userName, platform: 'iOS' }, { 'beta tester': betaTester }).then((res) => {
+    applaunchService.initialize('us-south', 'ad237ea7-f850-49d2-9f79-d926477dce19', 'f8adac30-ca10-4d72-96dc-afc47936a043', deviceId, null, { userId: this.state.userName, platform: Platform.OS }, { 'beta tester': betaTester }).then((res) => {
       console.log(`init ${JSON.stringify(res)}`);
     }).catch((err) => {
       console.log(`err ${JSON.stringify(err)}`);
