@@ -96,29 +96,45 @@ That's it - Now when your app reinitializes, it will show the 'Book a test drive
 
 ### Concept 3 - Vary App Customisation by percentage of Users
 
-Often Developers would want to create multiple variants of Feature properties and apply them to a different percentage of users. For example, in the Poll example, fifty percentage of users should see one variation of the poll question and the remaining fifty should see variation of the same question. The idea is to perform an A/B test on users to arrive at the more suitable question.
+Often Developers would want to create multiple variants of Feature properties and apply them to a different percentage of users. For example, in Vrooom App,you may wish to present the Book button as sticky to one set of users and as a non-sticky to the other set.The idea is to perform an A/B test on users to implement the design on basis of what is more engaging.
 
- - **Feature** - No change
- - **Audience** - No change
- - **Engagement** - Engagement allows you to create multiple Feature instances (variations) by setting a percentage for each instance. For example,
+ - **Feature** - Let's call this feature - **Sticky Book Button Feature**
+	 - Define properties in this feature
+		 - bookingPosition  - 'sticky'.
+		 - buttonColor - '#FF5722'.
+ - **Audience** - Let's say you'd like to target to only beta users, then you will define an Audience, called **Beta Users** with a new boolean attribute 'betaUserAttribute'.
+	 - Let's define an audience called, **Beta Users** 
+	 - Select the 'betaUserAttribute' and set its value to true.
+ - **Engagement** - Engagement allows you to create multiple Feature instances (variations) by setting a percentage for each instance. We'll choose the experimentation type as **A/B Testing** in the console, and add two variants in the feature. For example,
 	 - Variant 1 (50%)
-		 - popUpText - “Is the new feature making a difference?”
-		 - popUpYes  - “Yes”
-		 - popUpNo - “No”
+		 - bookingPosition - 'sticky' (default).
 	 - Variant 2 (50%)
-		 - popUpText - “How do you like the new feature?”
-		 - popUpYes  - “Great”
-		 - popUpNo - “Not Really”
- - Code - No change in the code since the App Launch Service handles the audience segmentation.
+		 - popUpText - 'non-sticky'. 
+
+Once the above is defined in the Console, in your code confiure the App Launch service as below:
+
+```
+componentDidMount(){
+	applaunchService.hasFeatureWith('_f4dn5s8pu', (val) => {
+      if (val) {
+        applaunchService.getValueFor('_f4dn5s8pu', '_bllfx2mda', (err, text) => {
+          if (text) {
+            this.setState({ bookingPosition: text });
+          }
+        });
+      }
+    });
+  }
+}
+```
+That's it - Now when your app reinitializes, it will show the Book button as sticky to 50% of the users and to the other 50% it will show the button as non-sticky.
 
 ### Concept 4 - App Customisation by audiences
 This is perhaps the most advanced and the most powerful feature that App Launch Service supports.
 Take Book Test Drive Feature, for example, if you would like to create two audiences, Android users and iOS users and tailor app customisation for each audience then user experience can be customised for different devices.
 
  - **Feature** - Same as concept 2.
- - **Audience** - Let's say you'd like to target to only beta users, then you will define an Audience, called **Beta Users** with a new boolean attribute 'betaUserAttribute'.
-	 - Let's define an audience called, **Beta Users** 
-	 - Select the 'betaUserAttribute' and set its value to true.
+ - **Audience** - Same as concept 1. 
  - **Engagement** - As defined in Concept 1 an engagement instantiates a feature by setting values. In this case, we will create a new engagement to target the new audience.
 	 - Create an Engagement, called - **BetaUsersTestDrive**
 		 - Select the Test Drive Feature with the below properties, you can also override these properties in your engagement:
