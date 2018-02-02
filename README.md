@@ -2,7 +2,7 @@
 
 ## Overview
 Vroom is a local bike/scooter rental app that lets you book your two wheeler on availabilty and lets you choose the desired time based on the availablity. This app uses the IBM App Launch Service that helps you control your application features. It demoes the following feaure of App Launch Service :
-- Remote App Customisation.
+- Remote App Customisation.[Link to a header](#Concept 1 - Remote App Customisation)
 - Remote Feature Toggle.
 - App Customisation by audiences
 
