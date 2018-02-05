@@ -21,12 +21,17 @@ Let's say we would like to change the app layout from grid to a list. The App La
 ![Create feature](https://github.com/SangeetManghnani/vroom/blob/master/src/assets/images/demo/concept1/create_feature.gif)
  - **Audience** - An audience is a collection of attributes that define the characteristics of an audience segment. Let's say you'd like to target to all users, then you will define an Audience, called allUsers with 'platforms' attribute with 'ios' and 'android' selected.
 	 - Let's define an audience called, **List View Users** 
+
+![Create Audience](https://github.com/SangeetManghnani/vroom/blob/master/src/assets/images/demo/concept1/create_audience.gif)
+
  - **Engagement** - An engagement is an instantiation of a Feature with properties initialized and attaching one of the pre-defined audiences. For our List View feature, we will,
 	 - Create an Engagement, called - **List View Engagement**
 		 - Select the List View Feature with the below properties:
 			 - layoutType = "list"
 		 - Initialize Audience,
 			 - Audience="List View Users"
+
+![Create Engagement](https://github.com/SangeetManghnani/vroom/blob/master/src/assets/images/demo/concept1/create_engagement.gif)
 
 Once the above is defined in the Console, in your code you will initialize the service and call the registration API
  ```
