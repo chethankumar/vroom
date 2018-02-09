@@ -18,7 +18,7 @@ Let's say we would like to change the app layout from grid to a list. The App La
 	 - Define properties in this feature
 		 - property  - layoutType(default value - 'list').
 
-![Create feature](https://raw.githubusercontent.com/SangeetManghnani/vroom/blob/master/src/assets/images/demo/concept1/create_feature.gif)
+<img src="https://raw.githubusercontent.com/SangeetManghnani/vroom/master/src/assets/images/demo/concept1/create_feature.gif"/>
  - **Audience** - An audience is a collection of attributes that define the characteristics of an audience segment. Let's say you'd like to target to all users, then you will define an Audience, called allUsers with 'platforms' attribute with 'ios' and 'android' selected.
 	 - Let's define an audience called, **List View Users** 
 
@@ -31,7 +31,7 @@ Let's say we would like to change the app layout from grid to a list. The App La
 		 - Initialize Audience,
 			 - Audience="List View Users"
 
-![Create Engagement](https://github.com/SangeetManghnani/vroom/blob/master/src/assets/images/demo/concept1/create_engagement.gif)
+<img src="https://raw.githubusercontent.com/SangeetManghnani/vroom/master/src/assets/images/demo/concept1/create_engagement.gif"/>
 
 Once the above is defined in the Console, in your code you will initialize the service and call the registration API
  ```
